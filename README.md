@@ -82,7 +82,10 @@ swift build -c release
 ./Scripts/make-app.sh
 ```
 
-产物在 `build/Macsoft X.app`。需要 macOS 15+ 和 Xcode 15+。项目零第三方依赖，只用系统框架。
+产物在 `build/Macsoft X.app`。项目零第三方依赖，只用系统框架。
+
+- **运行要求**：macOS 15 或更高
+- **构建要求**：Xcode 26 或更高（工具栏布局用了 macOS 26 引入的 `ToolbarSpacer`；用更早的 Xcode 构建会报 `cannot find 'ToolbarSpacer' in scope`）
 
 ## 命令行
 

@@ -12,8 +12,8 @@ concurrency:
 
 jobs:
   build-and-test:
-    name: Build & Test (macOS 15)
-    runs-on: macos-15
+    name: Build & Test (macOS 26)
+    runs-on: macos-26
 
     steps:
       - uses: actions/checkout@v5
@@ -34,7 +34,7 @@ jobs:
 
   scan-smoke-test:
     name: CLI smoke test
-    runs-on: macos-15
+    runs-on: macos-26
     # 真实扫描需要用户的 brew/npm/gem 环境，PR 上不跑，仅在主干推送后做冒烟验证
     if: github.event_name == 'push'
 

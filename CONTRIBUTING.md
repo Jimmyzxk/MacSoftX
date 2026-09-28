@@ -7,7 +7,7 @@
 | 项 | 要求 |
 |---|---|
 | macOS | 15.0 或更高（[Package.swift](Package.swift) 的部署目标） |
-| Xcode | 15 或更高（提供 Swift 5.9+ 工具链） |
+| Xcode | **26 或更高**。工具栏布局使用了 macOS 26 SDK 才引入的 `ToolbarSpacer`，用 Xcode 15/16 编译会报 `cannot find 'ToolbarSpacer' in scope`。CI 在 `macos-26` runner 上构建 |
 | Swift | 5.9+ |
 | 运行时依赖 | Homebrew（brew）、Node.js（npm）、Ruby（gem）、uv、mas —— **全部可选**，缺哪个就跳过哪个源 |
 
