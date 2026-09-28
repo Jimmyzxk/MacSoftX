@@ -51,7 +51,7 @@ MIT 协议，完全免费。没有内购，没有订阅，没有广告，不需�
 
 ## 安装
 
-从 [Releases](https://github.com/Jimmyzxk/MacSoftX/releases/latest) 下载 `MacsoftX-1.0.0.dmg`，打开后把 Macsoft X 拖进「应用程序」。
+从 [Releases](https://github.com/Jimmyzxk/MacSoftX/releases/latest) 下载 `MacsoftX-1.0.1.dmg`，打开后把 Macsoft X 拖进「应用程序」。
 
 需要 **macOS 15 或更高**。
 

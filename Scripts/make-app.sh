@@ -34,7 +34,7 @@ if [ -f "${PROJECT_DIR}/design/concepts/menuicon-template@1x.png" ]; then
 fi
 
 # 4. 写入 Info.plist 纯文本（支持 RELEASE_VERSION 环境变量覆盖版本号）
-APP_VERSION="${RELEASE_VERSION:-1.0.0}"
+APP_VERSION="${RELEASE_VERSION:-1.0.1}"
 cat > "${CONTENTS_DIR}/Info.plist" << EOF
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
