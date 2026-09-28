@@ -109,7 +109,7 @@ rm -rf AppIcon.iconset
 ## 六、交付物完整清单
 
 ```
-/Volumes/nv-ssd/projects/upmac/design/
+design/
 ├── concepts/
 │   ├── concept-c2.svg           # 【🔥 App Icon 推荐首选】演化版：魔方基座 + 循环箭头徽记 (1024x1024)
 │   ├── concept-c1.svg           # 【App Icon 精修版】纯几何：间隙加大 8% + 锐化 + 紧凑菱形 (1024x1024)

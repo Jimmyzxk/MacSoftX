@@ -26,7 +26,7 @@ final class GemDetailsParserTests: XCTestCase {
 
         cocoapods (1.15.2)
             Authors: Test
-            Installed at: /Users/jimmy/.gem/ruby/2.6.0
+            Installed at: /Users/testuser/.gem/ruby/2.6.0
 
             CocoaPods
 
@@ -41,7 +41,7 @@ final class GemDetailsParserTests: XCTestCase {
         XCTAssertEqual(map.count, 4)
         XCTAssertEqual(map["bigdecimal"], "/Library/Ruby/Gems/2.6.0")
         XCTAssertEqual(map["CFPropertyList"], "/System/Library/Frameworks/Ruby.framework/Versions/2.6/usr/lib/ruby/gems/2.6.0")
-        XCTAssertEqual(map["cocoapods"], "/Users/jimmy/.gem/ruby/2.6.0")
+        XCTAssertEqual(map["cocoapods"], "/Users/testuser/.gem/ruby/2.6.0")
         XCTAssertEqual(map["rake"], "/Library/Ruby/Gems/2.6.0")
         // 保守：系统路径应可被 GemProvider 过滤
         XCTAssertTrue(map["bigdecimal"]!.hasPrefix("/Library/Ruby/"))
@@ -61,14 +61,14 @@ final class GemDetailsParserTests: XCTestCase {
 
         rake (13.0.6)
             Authors: Test
-            Installed at: /Users/jimmy/.gem/ruby/3.0.0
+            Installed at: /Users/testuser/.gem/ruby/3.0.0
 
             Rake
         """
         let map = GemDetailsParser.parse(text)
         XCTAssertEqual(map.count, 1)
         XCTAssertNil(map["bundler"])
-        XCTAssertEqual(map["rake"], "/Users/jimmy/.gem/ruby/3.0.0")
+        XCTAssertEqual(map["rake"], "/Users/testuser/.gem/ruby/3.0.0")
     }
 
     // 3. 空输出
@@ -88,7 +88,7 @@ final class GemDetailsParserTests: XCTestCase {
             Installed at (default): /Library/Ruby/Gems/2.6.0
 
         cocoapods (1.15.2)
-            Installed at: /Users/jimmy/.gem/ruby/2.6.0
+            Installed at: /Users/testuser/.gem/ruby/2.6.0
 
         fastlane (2.221.1)
             Installed at: /opt/homebrew/lib/ruby/gems/3.1.0
@@ -97,16 +97,16 @@ final class GemDetailsParserTests: XCTestCase {
             Installed at: /System/Library/Frameworks/Ruby.framework/Versions/2.6/usr/lib/ruby/gems/2.6.0
 
         mygem (0.1.0)
-            Installed at: /Users/jimmy/.gem/ruby/2.6.0
+            Installed at: /Users/testuser/.gem/ruby/2.6.0
         """
         let map = GemDetailsParser.parse(text)
         XCTAssertEqual(map.count, 6)
         XCTAssertEqual(map["bigdecimal"], "/Library/Ruby/Gems/2.6.0")
         XCTAssertEqual(map["psych"], "/Library/Ruby/Gems/2.6.0")
-        XCTAssertEqual(map["cocoapods"], "/Users/jimmy/.gem/ruby/2.6.0")
+        XCTAssertEqual(map["cocoapods"], "/Users/testuser/.gem/ruby/2.6.0")
         XCTAssertEqual(map["fastlane"], "/opt/homebrew/lib/ruby/gems/3.1.0")
         XCTAssertEqual(map["nokogiri"], "/System/Library/Frameworks/Ruby.framework/Versions/2.6/usr/lib/ruby/gems/2.6.0")
-        XCTAssertEqual(map["mygem"], "/Users/jimmy/.gem/ruby/2.6.0")
+        XCTAssertEqual(map["mygem"], "/Users/testuser/.gem/ruby/2.6.0")
 
         // 模拟 GemProvider 过滤规则
         let systemPrefixFiltered = map.filter { $0.value.hasPrefix("/Library/Ruby/") || $0.value.hasPrefix("/System/Library/") }
