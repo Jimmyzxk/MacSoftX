@@ -1,23 +1,36 @@
 # Macsoft X
 
-> 一个面板，看全你 Mac 上的所有软件更新。
-
-Mac 菜单栏软件管理器：把 **GUI 应用、App Store 应用、终端里的 CLI 包管理器** 聚到同一个面板，逐项或一键更新，并附带软件清单、干净卸载与残留清理。
+一个面板，看全 Mac 上的所有软件更新。
 
 ![macOS](https://img.shields.io/badge/macOS-15%2B-000000?style=flat&logo=apple&logoColor=white)
 ![Swift](https://img.shields.io/badge/Swift-5.9%2B-F05138?style=flat&logo=swift&logoColor=white)
 ![License](https://img.shields.io/badge/license-MIT-green?style=flat)
 [![CI](https://github.com/Jimmyzxk/MacSoftX/actions/workflows/ci.yml/badge.svg)](https://github.com/Jimmyzxk/MacSoftX/actions/workflows/ci.yml)
 
-## 为什么做它
+## 问题
 
-Mac 的软件散落在三个互不相通的地方：
+Mac 上的软件来自四个渠道，各管各的：
 
-- **手动拖进 `/Applications` 的应用**——没有统一入口，过期了只有打开应用才知道
-- **App Store 应用**——`mas` 能管，但要单独装命令行工具
-- **终端里的包管理器**（npm / gem / uv / brew）——完全在另一个世界，窗口最小化就忘了
+| 渠道 | 怎么更新 |
+|---|---|
+| 手动拖进 `/Applications` 的应用 | 打开应用，在菜单里点「检查更新」 |
+| App Store 应用 | 只能靠 App Store |
+| Homebrew 装的 | `brew upgrade` |
+| 命令行工具（npm / gem / uv） | 各自的升级命令 |
 
-现有的工具只覆盖其中一块。**Macsoft X 的价值在于：把它们聚合起来，并且能真的执行更新。**
+每个工具都只认自己装过的东西。所以「我这台机器上还有哪些软件该更新」，得挨个去问一遍。
+
+最麻烦的是第一类。手动拖进来的应用没有统一的更新机制，只能一个个打开、点菜单、等它自己检查，或者干脆忘了。而这些往往正是你天天在用的软件。
+
+## 做法
+
+Macsoft X 把这些渠道收进同一个菜单栏面板，并且**真的把更新执行掉**：
+
+- 扫描时同时问四个渠道，谁有更新一目了然
+- 手动安装的应用，从 Homebrew 的 cask 定义里查到最新版本号做比对。发现过期后执行 `brew install --cask --force` 直接更新到最新版，不用你自己去官网下载
+- 更新完由 Homebrew 接管后续管理，之后就能走 `brew upgrade` 了
+
+只有两种情况会退回手动：cask 里找不到这个应用的定义（打开下载页），或者它自带更新器（启动应用让它自己检查）。这两种情况面板都会明确标出来，不会假装已经更新。
 
 ## 能力
 
@@ -29,27 +42,40 @@ Mac 的软件散落在三个互不相通的地方：
 | uv | tool 升级 |
 | Mac App Store | 经 `mas` 检测与更新（未安装可在应用内一键装） |
 | Sparkle 应用 | 解析 appcast 检测更新 |
-| **手动安装的应用** | 用 Cask API 查版本，用 `brew install --cask --force` **直接更新**（不跳转到下载页） |
+| 手动安装的应用 | 经 Cask API 比对版本，用 `brew install --cask --force` 直接更新 |
 | 软件清单 | 全盘扫描，标注每项的来源与是否被包管理器托管 |
 | 干净卸载 | 托管的走包管理器卸载，游离的移入废纸篓 |
 | 残留清理 | 扫描已卸载软件遗留的配置、缓存、日志、容器 |
-| 通知 | 仅在**出现新**可更新项时提醒，不重复轰炸 |
+| 通知 | 仅在新出现可更新项时提醒，不重复轰炸 |
 | 定时扫描 | 可配置间隔，后台自动执行 |
-| 忽略规则 | 按来源+名称永久或临时忽略 |
+| 忽略规则 | 按来源和名称永久或临时忽略 |
 | 开机自启 | `SMAppService` |
 
-国内网络环境下，npm 与 RubyGems 的**只读扫描会自动使用国内镜像**（不修改你的 `~/.npmrc` 与 gem sources），实测可把 gem 扫描从 97 秒降到 28 秒。
+国内网络下，npm 与 RubyGems 的只读扫描会自动使用国内镜像（不改动你的 `~/.npmrc` 和 gem sources），实测把 gem 扫描从 97 秒降到 28 秒。
 
 ## 界面
 
-- **菜单栏**——循环徽记图标 + 待更新数字徽标，点开是玻璃质感气泡面板
-- **主窗**——侧栏任务导航（待更新 / 全部软件 / 手动安装 / 清理 / 已忽略）+ 工具栏（搜索、排序、扫描）+ 行式列表 + 独立详情浮窗
+菜单栏常驻一个循环徽记图标，旁边是待更新数字徽标，点开是玻璃质感气泡面板。
+
+主窗左侧是任务导航（待更新 / 全部软件 / 手动安装 / 清理 / 已忽略），顶部工具栏提供搜索、排序和手动扫描，右侧可展开独立详情浮窗。
 
 设计规范见 [docs/08-design-spec.md](docs/08-design-spec.md)，含文案规则与组件 token。
 
 ## 安装
 
-### 自行构建
+### 下载安装包
+
+从 [Releases](https://github.com/Jimmyzxk/MacSoftX/releases/latest) 下载 `MacsoftX-1.0.0.dmg`，打开后把 Macsoft X 拖进「应用程序」。
+
+应用未做 Apple 公证（需 99 美元/年的开发者账号），首次打开会被 Gatekeeper 拦下。在「系统设置 → 隐私与安全性」里点「仍要打开」，或执行：
+
+```bash
+xattr -d com.apple.quarantine /Applications/Macsoft\ X.app
+```
+
+需要 macOS 15 或更高。
+
+### 从源码构建
 
 ```bash
 git clone https://github.com/Jimmyzxk/MacSoftX.git
@@ -58,23 +84,15 @@ swift build -c release
 ./Scripts/make-app.sh
 ```
 
-产物在 `build/Macsoft X.app`，拖入「应用程序」即可。
-
-**要求**：macOS 15+、Xcode 15+。项目**零第三方 SwiftPM 依赖**，只使用系统框架。
-
-未配置 Apple Developer ID，产物为 ad-hoc 签名。首次打开若被 Gatekeeper 拦截，在「系统设置 - 隐私与安全性」中点「仍要打开」，或：
-
-```bash
-xattr -d com.apple.quarantine /Applications/Macsoft\ X.app
-```
+产物在 `build/Macsoft X.app`。需要 macOS 15+ 和 Xcode 15+，项目零第三方依赖，只用系统框架。
 
 ### 可选依赖
 
-以下工具**全部可选**，缺少哪个就自动跳过对应来源，不影响其他功能：
+以下工具全部可选，缺少哪个就自动跳过对应来源，不影响其他功能：
 
 | 工具 | 用途 | 安装 |
 |---|---|---|
-| Homebrew | formula/cask 源 | 官网安装 |
+| Homebrew | formula 与 cask 源 | 官网安装 |
 | `mas` | App Store 源 | 应用内一键安装，或 `brew install mas` |
 | Node.js | npm 源 | 官网安装 |
 | Ruby | gem 源 | 系统自带 |

@@ -34,7 +34,7 @@ if [ -f "${PROJECT_DIR}/design/concepts/menuicon-template@1x.png" ]; then
 fi
 
 # 4. 写入 Info.plist 纯文本（支持 RELEASE_VERSION 环境变量覆盖版本号）
-APP_VERSION="${RELEASE_VERSION:-0.1.0}"
+APP_VERSION="${RELEASE_VERSION:-1.0.0}"
 cat > "${CONTENTS_DIR}/Info.plist" << EOF
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
@@ -49,13 +49,13 @@ cat > "${CONTENTS_DIR}/Info.plist" << EOF
     <key>CFBundleExecutable</key>
     <string>upmac</string>
     <key>CFBundleIdentifier</key>
-    <string>xyz.jimmy.upmac</string>
+    <string>io.github.jimmyzxk.macsoftx</string>
     <key>CFBundleVersion</key>
     <string>1</string>
     <key>CFBundleShortVersionString</key>
     <string>${APP_VERSION}</string>
     <key>LSMinimumSystemVersion</key>
-    <string>26.0</string>
+    <string>15.0</string>
     <key>LSUIElement</key>
     <true/>
     <key>NSHighResolutionCapable</key>
