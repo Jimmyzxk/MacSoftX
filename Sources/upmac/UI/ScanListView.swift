@@ -269,6 +269,14 @@ public struct ScanListView: View {
 
     private func friendlyErrorMessage(providerId: String, raw: String) -> String {
         let name = EcosystemTheme.displayName(for: providerId)
+
+        // ProviderError 的 errorDescription 已经是面向用户的中文文案（见 UpdateProvider.swift），
+        // 这里只补来源名，不能再套一层英文关键词翻译——否则中文文案匹配不上，会被降级成泛化兜底。
+        for known in ["超时", "解析返回结果失败", "未找到", "管理员权限", "登录凭据"] where raw.contains(known) {
+            return "\(name)：\(raw)"
+        }
+
+        // 下面只处理系统层原始错误（NSError / POSIX / URLSession 的英文描述）
         let lower = raw.lowercased()
         if lower.contains("timed out") || lower.contains("timeout") || lower.contains("timedout") {
             return "\(name) 扫描超时（网络较慢），下次扫描将重试"
@@ -284,9 +292,6 @@ public struct ScanListView: View {
         }
         if lower.contains("permission denied") || lower.contains("operation not permitted") {
             return "\(name) 无权访问所需资源，请在「系统设置 - 隐私与安全性」中授权"
-        }
-        if lower.contains("sudo privilege required") {
-            return "\(name) 此项需要管理员权限，请前往终端手动执行"
         }
         // 兜底：原始报错常常是整段英文 stderr，直接倾泻到 UI 既不可读也无信息量
         return "\(name) 扫描失败，详情请查看终端模式（--scan）输出"

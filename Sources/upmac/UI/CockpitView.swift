@@ -225,7 +225,7 @@ public struct CockpitView: View {
             // MARK: - 单列主列表区（回归单列，无检查器尾栏）
             middleListPane
         }
-        .navigationTitle("Macsoft X")
+        .navigationTitle("")
         .toolbar(removing: .sidebarToggle)
         .frame(minWidth: 880, minHeight: 520)
         .background {
@@ -233,6 +233,9 @@ public struct CockpitView: View {
         }
         .background {
             WindowAccessor { window in
+                // 标题仅用于 WindowManager 防多开匹配（见 openOrFocusMainWindow 的标题白名单），
+                // 视觉上隐藏——品牌展示已由工具栏 Slogan 与侧栏品牌头承担，再显示标题就是第三次重复。
+                window.title = "最好用的 Mac 软件管理工具"
                 window.titleVisibility = .hidden
                 window.titlebarAppearsTransparent = true
             }
@@ -291,37 +294,77 @@ public struct CockpitView: View {
         colorScheme == .dark ? Self.sidebarGradientDark : Self.sidebarGradientLight
     }
 
-    // MARK: - 侧栏收尾品牌展示位（水平左右布局：左彩色 C2 徽记 44pt + 右 Macsoft X 渐变字标，整组水平居中）
-    private var bottomBrandHero: some View {
-        HStack(spacing: 10) {
-            // 左：C2 纯彩色徽记主体（44pt）
-            BrandMarkView(size: 44, style: .colorful)
-                .shadow(color: Color.black.opacity(colorScheme == .dark ? 0.35 : 0.16), radius: 4, x: 0, y: 2)
+    // MARK: - 工具栏 Slogan 字标（与搜索框同排，省下内容区一整行）
+    private var toolbarSlogan: some View {
+        HStack(spacing: 4) {
+            Text("最好用的")
+                .font(.system(size: 12, weight: .regular))
+                .foregroundStyle(DesignSystem.Colors.textSecondary)
+                .tracking(-0.3)
 
-            // 右：Macsoft X 字标（Macsoft 15pt semibold 白 + X 17pt 渐变 bold），整体 -0.5pt 字距
-            HStack(spacing: 0) {
-                Text("Macsoft")
-                    .font(.system(size: 15, weight: .semibold))
-                    .foregroundStyle(Color.white)
-                    .tracking(-0.5)
-
-                Text("X")
-                    .font(.system(size: 17, weight: .bold))
-                    .foregroundStyle(
-                        LinearGradient(
-                            colors: [
-                                Color(red: 0.35, green: 0.75, blue: 1.00),
-                                Color(red: 0.00, green: 0.96, blue: 0.83)
-                            ],
-                            startPoint: .topLeading,
-                            endPoint: .bottomTrailing
-                        )
+            Text("Mac")
+                .font(.system(size: 14, weight: .heavy))
+                .foregroundStyle(
+                    LinearGradient(
+                        colors: [
+                            Color(red: 0.05, green: 0.52, blue: 1.00),
+                            Color(red: 0.00, green: 0.85, blue: 0.72)
+                        ],
+                        startPoint: .topLeading,
+                        endPoint: .bottomTrailing
                     )
-                    .tracking(-0.5)
-            }
+                )
+                .tracking(-0.5)
+
+            Text("软件管理工具")
+                .font(.system(size: 13, weight: .semibold))
+                .foregroundStyle(DesignSystem.Colors.textPrimary)
+                .tracking(-0.3)
         }
-        .frame(maxWidth: .infinity, alignment: .center)
-        .padding(.vertical, 6)
+        .fixedSize()
+        .padding(.leading, 4)
+    }
+
+    // MARK: - 侧栏顶部品牌头（与右侧工具栏同高，保证两侧列表起点对齐）
+    // 迭代 2.15 曾把品牌块移到底部并居中，结果是侧栏顶部留出一大片空白渐变，看起来像渲染缺失。
+    // 现移回顶部：既填满顶部，又与右侧 Slogan 条等高，两个区域的第一个列表项自然对齐。
+    private var sidebarBrandHeader: some View {
+        VStack(spacing: 0) {
+            HStack(spacing: 9) {
+                BrandMarkView(size: 28, style: .colorful)
+                    .shadow(color: Color.black.opacity(colorScheme == .dark ? 0.30 : 0.16), radius: 3, x: 0, y: 1)
+
+                HStack(spacing: 0) {
+                    Text("Macsoft")
+                        .font(.system(size: 15, weight: .semibold))
+                        .foregroundStyle(Color.white)
+                        .tracking(-0.4)
+
+                    Text("X")
+                        .font(.system(size: 16, weight: .bold))
+                        .foregroundStyle(
+                            LinearGradient(
+                                colors: [
+                                    Color(red: 0.35, green: 0.75, blue: 1.00),
+                                    Color(red: 0.00, green: 0.96, blue: 0.83)
+                                ],
+                                startPoint: .topLeading,
+                                endPoint: .bottomTrailing
+                            )
+                        )
+                        .tracking(-0.4)
+                }
+
+                Spacer()
+            }
+            .padding(.horizontal, 16)
+            .frame(height: 40)
+
+            // 极淡分隔线：让品牌头读作独立区域，同时兜住下方列表的起点
+            Rectangle()
+                .fill(Color.white.opacity(colorScheme == .dark ? 0.08 : 0.12))
+                .frame(height: 0.5)
+        }
     }
 
     // MARK: - 侧栏底部设置行（最底一行，设置入口永远最后）
@@ -364,10 +407,13 @@ public struct CockpitView: View {
         .padding(.bottom, 8)
     }
 
-    // MARK: - 侧栏 v3：导航项 + 来源紧凑列表 + 品牌收尾 + 底部设置（docs/10 §2 & 迭代 2.10）
+    // MARK: - 侧栏 v3：品牌头 + 导航项 + 来源紧凑列表 + 底部设置（docs/10 §2 & 迭代 2.10）
     private var sidebarPane: some View {
         VStack(alignment: .leading, spacing: 0) {
-            // 侧栏顶部直接开始导航项（无组头，待更新/全部软件/手动安装/已忽略）
+            // 顶部品牌头（原底部品牌块，见 sidebarBrandHeader 注释）
+            sidebarBrandHeader
+
+            // 导航项与来源列表（ScrollView 自然填满剩余高度，不再用 Spacer 撑开）
             ScrollView {
                 VStack(alignment: .leading, spacing: 4) {
                     // ⟳ 待更新
@@ -484,12 +530,7 @@ public struct CockpitView: View {
                 .padding(.bottom, 4)
             }
 
-            Spacer(minLength: 8)
-
-            // 侧栏收尾品牌展示位：水平居中（左 44pt 彩色 C2 徽记 + 右 Macsoft X 渐变字标）
-            bottomBrandHero
-
-            // 侧栏最底一行设置行（设置入口永远最后）
+            // 底部只保留设置行（品牌块已上移至顶部）
             sidebarFooter
         }
         .frame(width: 200)
@@ -504,8 +545,7 @@ public struct CockpitView: View {
     // MARK: - 中间列表区与底部状态栏
     private var middleListPane: some View {
         VStack(spacing: 0) {
-            // MARK: - 主窗顶部页头：排版「最好用的 Mac 软件管理工具」（混排字重 + 品牌渐变 + 装饰竖条）
-            sloganHeaderBar
+            // 页头 Slogan 已移入工具栏（见 toolbarSlogan），此处不再占一行
 
             // 跨页全局检索跳转提示条（当另一页有更多匹配时）
             if !searchText.isEmpty {
@@ -560,6 +600,12 @@ public struct CockpitView: View {
             bottomStatusBar
         }
         .toolbar {
+            // Slogan 字标：放在工具栏最左（原独立页头行，与搜索框同排可省下一整行，
+            // 并避免「窗口标题 Macsoft X + 侧栏 Macsoft X + 页头 Slogan」三处品牌重复）
+            ToolbarItem(placement: .navigation) {
+                toolbarSlogan
+            }
+
             // 搜索框（支持 ⌘F 聚焦）
             ToolbarItem(placement: .automatic) {
                 HStack(spacing: DesignSystem.Spacing.xs) {
@@ -635,72 +681,6 @@ public struct CockpitView: View {
     }
 
     // MARK: - 主窗内容区顶部页头 Slogan 组件（混排字重 + 品牌渐变 + 装饰竖条）
-    private var sloganHeaderBar: some View {
-        HStack(spacing: 10) {
-            // 左侧 3pt 品牌渐变装饰竖条
-            RoundedRectangle(cornerRadius: 1.5)
-                .fill(
-                    LinearGradient(
-                        colors: [
-                            Color(red: 0.05, green: 0.52, blue: 1.00),
-                            Color(red: 0.00, green: 0.85, blue: 0.72)
-                        ],
-                        startPoint: .top,
-                        endPoint: .bottom
-                    )
-                )
-                .frame(width: 3, height: 18)
-
-            // 混排字标：「最好用的」13pt regular 浅淡白/灰 + 「Mac」17pt heavy 渐变蓝→青 + 「软件管理工具」16pt semibold
-            HStack(spacing: 4) {
-                Text("最好用的")
-                    .font(.system(size: 13, weight: .regular))
-                    .foregroundStyle(DesignSystem.Colors.textSecondary)
-                    .tracking(-0.3)
-
-                Text("Mac")
-                    .font(.system(size: 17, weight: .heavy))
-                    .foregroundStyle(
-                        LinearGradient(
-                            colors: [
-                                Color(red: 0.05, green: 0.52, blue: 1.00),
-                                Color(red: 0.00, green: 0.85, blue: 0.72)
-                            ],
-                            startPoint: .topLeading,
-                            endPoint: .bottomTrailing
-                        )
-                    )
-                    .tracking(-0.5)
-
-                Text("软件管理工具")
-                    .font(.system(size: 16, weight: .semibold))
-                    .foregroundStyle(DesignSystem.Colors.textPrimary)
-                    .tracking(-0.3)
-            }
-
-            Spacer()
-        }
-        .padding(.horizontal, 16)
-        .padding(.vertical, 8)
-        .background(
-            Rectangle()
-                .fill(
-                    LinearGradient(
-                        colors: [
-                            Color(red: 0.05, green: 0.52, blue: 1.00).opacity(colorScheme == .dark ? 0.08 : 0.04),
-                            Color(red: 0.00, green: 0.85, blue: 0.72).opacity(colorScheme == .dark ? 0.04 : 0.02),
-                            Color.clear
-                        ],
-                        startPoint: .leading,
-                        endPoint: .trailing
-                    )
-                )
-        )
-        .overlay(
-            Divider().opacity(colorScheme == .dark ? 0.4 : 0.2),
-            alignment: .bottom
-        )
-    }
 
     // MARK: - 跨页跳转条
     private func crossPageJumpBanner(title: String, targetTab: NavigationTab) -> some View {

@@ -197,10 +197,13 @@ private struct MiniRowItem: View {
             Spacer(minLength: 4)
 
             // 版本变迁常显 10 mono
+            // 必须 fixedSize：否则横向空间紧张时版本号会被压缩折成两行（如 0.12.18 显示为 "0.12.1"+"8"）。
+            // 名字已 lineLimit(1) 且限宽 110pt，空间不足时应由名字截断，而不是把版本号折断。
             HStack(spacing: 2) {
                 Text(item.currentVersion)
                     .font(.system(size: 10, design: .monospaced))
                     .foregroundStyle(DesignSystem.Colors.textSecondary)
+                    .lineLimit(1)
                 if let latest = item.latestVersion {
                     Text("→")
                         .font(.system(size: 8))
@@ -208,8 +211,10 @@ private struct MiniRowItem: View {
                     Text(latest)
                         .font(.system(size: 10, weight: .medium, design: .monospaced))
                         .foregroundStyle(DesignSystem.Colors.textPrimary)
+                        .lineLimit(1)
                 }
             }
+            .fixedSize(horizontal: true, vertical: false)
             .padding(.horizontal, 5)
             .padding(.vertical, 2)
             .background(DesignSystem.Colors.cardBackground, in: Capsule())
