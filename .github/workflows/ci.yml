@@ -1,0 +1,73 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build-and-test:
+    name: Build & Test (macOS 15)
+    runs-on: macos-15
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Show toolchain
+        run: |
+          swift --version
+          xcodebuild -version
+
+      - name: Build (warnings as errors)
+        run: swift build -Xswiftc -warnings-as-errors
+
+      - name: Build (release)
+        run: swift build -c release -Xswiftc -warnings-as-errors
+
+      - name: Test
+        run: swift test
+
+  scan-smoke-test:
+    name: CLI smoke test
+    runs-on: macos-15
+    # 真实扫描需要用户的 brew/npm/gem 环境，PR 上不跑，仅在主干推送后做冒烟验证
+    if: github.event_name == 'push'
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build
+        run: swift build
+
+      - name: Inventory mode (无外部依赖，应恒可用)
+        run: |
+          .build/debug/upmac --inventory > inventory.json
+          python3 -c "
+          import json
+          d = json.load(open('inventory.json'))
+          assert 'items' in d, 'inventory 输出缺少 items 字段'
+          print('inventory OK, items =', len(d['items']))
+          "
+
+      - name: Scan fast mode (缺少包管理器时应优雅降级，不应崩溃)
+        run: |
+          set +e
+          .build/debug/upmac --scan-fast > scan.json
+          code=$?
+          set -e
+          if [ $code -ne 0 ]; then
+            echo "::error::--scan-fast 退出码 $code"
+            exit $code
+          fi
+          python3 -c "
+          import json
+          d = json.load(open('scan.json'))
+          print('scan OK, outdated =', d['totalCount'])
+          for p in d['providers']:
+              print(f\"  {p['displayName']}: {p['count']} (available={p['isAvailable']})\")
+          "

@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MSI - Mac 软件管理工具 Logo 设计方案预览</title>
+  <style>
+    :root {
+      --font-sans: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
+      --font-mono: "SF Mono", Menlo, Monaco, Consolas, monospace;
+      --color-accent: #0a84ff;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--font-sans);
+      background: #0d1117;
+      color: #f0f6fc;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      padding-bottom: 80px;
+    }
+
+    .container {
+      max-width: 1360px;
+      margin: 0 auto;
+      padding: 40px 24px;
+    }
+
+    header {
+      margin-bottom: 48px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      padding-bottom: 32px;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      background: rgba(10, 132, 255, 0.15);
+      color: #58a6ff;
+      border: 1px solid rgba(10, 132, 255, 0.3);
+      margin-bottom: 12px;
+    }
+
+    h1 {
+      font-size: 34px;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      margin-bottom: 10px;
+    }
+
+    .subtitle {
+      font-size: 16px;
+      color: #8b949e;
+      max-width: 820px;
+    }
+
+    /* 方案卡片三列布局 */
+    .concepts-overview {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-bottom: 56px;
+    }
+
+    .concept-card {
+      background: rgba(22, 27, 34, 0.85);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 18px;
+      padding: 24px;
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.35);
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.2s ease, border-color 0.2s ease;
+    }
+
+    .concept-card:hover {
+      transform: translateY(-2px);
+      border-color: rgba(10, 132, 255, 0.5);
+    }
+
+    .concept-card.recommended {
+      border-color: #0a84ff;
+      box-shadow: 0 12px 36px rgba(10, 132, 255, 0.25);
+    }
+
+    .recommended-ribbon {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      background: linear-gradient(135deg, #007aff, #00c7be);
+      color: #ffffff;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 999px;
+      box-shadow: 0 2px 8px rgba(0, 122, 255, 0.4);
+    }
+
+    .concept-hero-icon {
+      width: 160px;
+      height: 160px;
+      margin: 12px auto 20px auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .concept-hero-icon img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      filter: drop-shadow(0 14px 20px rgba(0, 0, 0, 0.45));
+    }
+
+    .concept-title {
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 6px;
+      color: #ffffff;
+    }
+
+    .concept-subtitle {
+      font-size: 13px;
+      font-weight: 500;
+      color: #00c7be;
+      margin-bottom: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .concept-desc {
+      font-size: 14px;
+      color: #c9d1d9;
+      background: rgba(13, 17, 23, 0.6);
+      padding: 12px 14px;
+      border-radius: 10px;
+      border-left: 3px solid #0a84ff;
+      margin-bottom: 16px;
+      line-height: 1.55;
+    }
+
+    .palette-chips {
+      display: flex;
+      gap: 8px;
+      margin-top: auto;
+      padding-top: 12px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .chip {
+      flex: 1;
+      height: 24px;
+      border-radius: 6px;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      position: relative;
+    }
+
+    .chip-label {
+      font-size: 10px;
+      font-family: var(--font-mono);
+      color: #8b949e;
+      text-align: center;
+      margin-top: 4px;
+    }
+
+    /* 展台分栏（浅色/深色环境） */
+    .showcase-section {
+      margin-bottom: 48px;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 18px;
+    }
+
+    .section-title {
+      font-size: 22px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .section-desc {
+      font-size: 14px;
+      color: #8b949e;
+    }
+
+    /* 浅色环境展示栏 */
+    .environment-stage.light-mode {
+      background: linear-gradient(180deg, #f5f5f7 0%, #e5e5ea 100%);
+      border: 1px solid #d1d1d6;
+      border-radius: 24px;
+      padding: 36px 30px;
+      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.15);
+      color: #1d1d1f;
+    }
+
+    /* 深色环境展示栏 */
+    .environment-stage.dark-mode {
+      background: linear-gradient(180deg, #1e1e1e 0%, #121212 100%);
+      border: 1px solid #333333;
+      border-radius: 24px;
+      padding: 36px 30px;
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.55);
+      color: #f5f5f7;
+    }
+
+    .stage-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+    }
+
+    .stage-column {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .stage-col-header {
+      font-size: 15px;
+      font-weight: 600;
+      margin-bottom: 24px;
+      padding-bottom: 8px;
+      border-bottom: 2px solid rgba(0, 122, 255, 0.3);
+      width: 100%;
+      text-align: center;
+    }
+
+    .scales-row {
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      gap: 20px;
+      width: 100%;
+      padding: 10px 0;
+    }
+
+    .scale-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .scale-label {
+      font-size: 11px;
+      font-family: var(--font-mono);
+      font-weight: 600;
+      opacity: 0.7;
+    }
+
+    .icon-256 {
+      width: 140px;
+      height: 140px;
+    }
+
+    .icon-128 {
+      width: 80px;
+      height: 80px;
+    }
+
+    .icon-64 {
+      width: 44px;
+      height: 44px;
+    }
+
+    .icon-32 {
+      width: 24px;
+      height: 24px;
+    }
+
+    .icon-preview-img {
+      object-fit: contain;
+      display: block;
+      transition: transform 0.15s ease;
+    }
+
+    .icon-preview-img:hover {
+      transform: scale(1.06);
+    }
+
+    /* 对比分析表 */
+    .analysis-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 32px;
+      background: #161b22;
+      border-radius: 14px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .analysis-table th, .analysis-table td {
+      padding: 14px 18px;
+      text-align: left;
+      font-size: 14px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .analysis-table th {
+      background: rgba(255, 255, 255, 0.04);
+      font-weight: 600;
+      color: #8b949e;
+    }
+
+    .highlight-cell {
+      color: #58a6ff;
+      font-weight: 600;
+    }
+
+    footer {
+      margin-top: 60px;
+      text-align: center;
+      font-size: 13px;
+      color: #6e7681;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      padding-top: 24px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <span class="badge">macOS 14+ Sonoma / Sequoia 视觉语言</span>
+      <h1>MSI App Icon 设计方案矩阵</h1>
+      <p class="subtitle">Mac 软件管理工具「MSI」（聚合更新检测 + 软件清单 + 清理）。纯手工矢量 SVG，1024×1024 标准画布，完美匹配 macOS Big Sur+ 连续曲率圆角与多层拟物玻璃质感。</p>
+    </header>
+
+    <!-- 方案设计概述 -->
+    <div class="concepts-overview">
+      <!-- 方案 A -->
+      <div class="concept-card recommended">
+        <span class="recommended-ribbon">推荐首选方案</span>
+        <div class="concept-hero-icon">
+          <img src="concepts/concept-a.svg" alt="方案 A 双箭头循环">
+        </div>
+        <h2 class="concept-title">方案 A「双箭头循环」</h2>
+        <div class="concept-subtitle">M 字母 · 闭环循环 · 系统蓝至高亮青</div>
+        <div class="concept-desc">
+          以 MSI 字母 M 为骨架融合更新循环双箭头，系统蓝至高亮青渐变，喻示聚合检测与源源不断的高效更新流转。
+        </div>
+        <div class="palette-chips">
+          <div>
+            <div class="chip" style="background: #007aff;"></div>
+            <div class="chip-label">#007AFF</div>
+          </div>
+          <div>
+            <div class="chip" style="background: #00e5ff;"></div>
+            <div class="chip-label">#00E5FF</div>
+          </div>
+          <div>
+            <div class="chip" style="background: #00c7be;"></div>
+            <div class="chip-label">#00C7BE</div>
+          </div>
+          <div>
+            <div class="chip" style="background: #0b1329;"></div>
+            <div class="chip-label">#0B1329</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 方案 B -->
+      <div class="concept-card">
+        <div class="concept-hero-icon">
+          <img src="concepts/concept-b.svg" alt="方案 B 盾牌+勾">
+        </div>
+        <h2 class="concept-title">方案 B「盾牌+勾」</h2>
+        <div class="concept-subtitle">安全管理 · 双切面微光 · 蓝至深靛</div>
+        <div class="concept-desc">
+          管理源于信赖。以立体双切面护盾内嵌高亮悬浮对勾，蓝至深靛渐变折射微光，传递软件校验与稳定守护之感。
+        </div>
+        <div class="palette-chips">
+          <div>
+            <div class="chip" style="background: #007aff;"></div>
+            <div class="chip-label">#007AFF</div>
+          </div>
+          <div>
+            <div class="chip" style="background: #6366f1;"></div>
+            <div class="chip-label">#6366F1</div>
+          </div>
+          <div>
+            <div class="chip" style="background: #312e81;"></div>
+            <div class="chip-label">#312E81</div>
+          </div>
+          <div>
+            <div class="chip" style="background: #ffffff;"></div>
+            <div class="chip-label">#FFFFFF</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 方案 C -->
+      <div class="concept-card">
+        <div class="concept-hero-icon">
+          <img src="concepts/concept-c.svg" alt="方案 C 软件魔方">
+        </div>
+        <h2 class="concept-title">方案 C「软件魔方」</h2>
+        <div class="concept-subtitle">应用模块 · 负空间 M · 蓝/青/白三色</div>
+        <div class="concept-desc">
+          三枚圆角应用方块悬浮交叠，克制调和蓝、青与冰透白，以精致负空间自然勾勒 M 字母，寓意模块化管理与清理。
+        </div>
+        <div class="palette-chips">
+          <div>
+            <div class="chip" style="background: #007aff;"></div>
+            <div class="chip-label">#007AFF</div>
+          </div>
+          <div>
+            <div class="chip" style="background: #00c7be;"></div>
+            <div class="chip-label">#00C7BE</div>
+          </div>
+          <div>
+            <div class="chip" style="background: #f8fafc;"></div>
+            <div class="chip-label">#FFFFFF</div>
+          </div>
+          <div>
+            <div class="chip" style="background: #0a1020;"></div>
+            <div class="chip-label">#0A1020</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 1. 浅色背景展示行 (Light Mode) -->
+    <div class="showcase-section">
+      <div class="section-header">
+        <h3 class="section-title">☀️ 浅色环境展示 (macOS Light Mode)</h3>
+        <span class="section-desc">模拟浅色桌面背景，验证 256 / 128 / 64 / 32 四档尺寸在亮色壁纸下的边缘对比与清晰度</span>
+      </div>
+      <div class="environment-stage light-mode">
+        <div class="stage-grid">
+          <!-- 方案 A 浅色缩放 -->
+          <div class="stage-column">
+            <div class="stage-col-header" style="color: #0055ff;">方案 A「双箭头循环」</div>
+            <div class="scales-row">
+              <div class="scale-item">
+                <img class="icon-preview-img icon-256" src="concepts/concept-a.svg" alt="A-256">
+                <span class="scale-label">256px</span>
+              </div>
+              <div class="scale-item">
+                <img class="icon-preview-img icon-128" src="concepts/concept-a.svg" alt="A-128">
+                <span class="scale-label">128px</span>
+              </div>
+              <div class="scale-item">
+                <img class="icon-preview-img icon-64" src="concepts/concept-a.svg" alt="A-64">
+                <span class="scale-label">64px</span>
+              </div>
+              <div class="scale-item">
+                <img class="icon-preview-img icon-32" src="concepts/concept-a.svg" alt="A-32">
+                <span class="scale-label">32px</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 方案 B 浅色缩放 -->
+          <div class="stage-column">
+            <div class="stage-col-header" style="color: #4338ca;">方案 B「盾牌+勾」</div>
+            <div class="scales-row">
+              <div class="scale-item">
+                <img class="icon-preview-img icon-256" src="concepts/concept-b.svg" alt="B-256">
+                <span class="scale-label">256px</span>
+              </div>
+              <div class="scale-item">
+                <img class="icon-preview-img icon-128" src="concepts/concept-b.svg" alt="B-128">
+                <span class="scale-label">128px</span>
+              </div>
+              <div class="scale-item">
+                <img class="icon-preview-img icon-64" src="concepts/concept-b.svg" alt="B-64">
+                <span class="scale-label">64px</span>
+              </div>
+              <div class="scale-item">
+                <img class="icon-preview-img icon-32" src="concepts/concept-b.svg" alt="B-32">
+                <span class="scale-label">32px</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 方案 C 浅色缩放 -->
+          <div class="stage-column">
+            <div class="stage-col-header" style="color: #008080;">方案 C「软件魔方」</div>
+            <div class="scales-row">
+              <div class="scale-item">
+                <img class="icon-preview-img icon-256" src="concepts/concept-c.svg" alt="C-256">
+                <span class="scale-label">256px</span>
+              </div>
+              <div class="scale-item">
+                <img class="icon-preview-img icon-128" src="concepts/concept-c.svg" alt="C-128">
+                <span class="scale-label">128px</span>
+              </div>
+              <div class="scale-item">
+                <img class="icon-preview-img icon-64" src="concepts/concept-c.svg" alt="C-64">
+                <span class="scale-label">64px</span>
+              </div>
+              <div class="scale-item">
+                <img class="icon-preview-img icon-32" src="concepts/concept-c.svg" alt="C-32">
+                <span class="scale-label">32px</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2. 深色背景展示行 (Dark Mode) -->
+    <div class="showcase-section">
+      <div class="section-header">
+        <h3 class="section-title">🌙 深色环境展示 (macOS Dark Mode)</h3>
+        <span class="section-desc">模拟深色暗光桌面环境，验证图标在深色模式下的自发光、高光边缘与立体深度表现</span>
+      </div>
+      <div class="environment-stage dark-mode">
+        <div class="stage-grid">
+          <!-- 方案 A 深色缩放 -->
+          <div class="stage-column">
+            <div class="stage-col-header" style="color: #00e5ff;">方案 A「双箭头循环」</div>
+            <div class="scales-row">
+              <div class="scale-item">
+                <img class="icon-preview-img icon-256" src="concepts/concept-a.svg" alt="A-256">
+                <span class="scale-label">256px</span>
+              </div>
+              <div class="scale-item">
+                <img class="icon-preview-img icon-128" src="concepts/concept-a.svg" alt="A-128">
+                <span class="scale-label">128px</span>
+              </div>
+              <div class="scale-item">
+                <img class="icon-preview-img icon-64" src="concepts/concept-a.svg" alt="A-64">
+                <span class="scale-label">64px</span>
+              </div>
+              <div class="scale-item">
+                <img class="icon-preview-img icon-32" src="concepts/concept-a.svg" alt="A-32">
+                <span class="scale-label">32px</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 方案 B 深色缩放 -->
+          <div class="stage-column">
+            <div class="stage-col-header" style="color: #818cf8;">方案 B「盾牌+勾」</div>
+            <div class="scales-row">
+              <div class="scale-item">
+                <img class="icon-preview-img icon-256" src="concepts/concept-b.svg" alt="B-256">
+                <span class="scale-label">256px</span>
+              </div>
+              <div class="scale-item">
+                <img class="icon-preview-img icon-128" src="concepts/concept-b.svg" alt="B-128">
+                <span class="scale-label">128px</span>
+              </div>
+              <div class="scale-item">
+                <img class="icon-preview-img icon-64" src="concepts/concept-b.svg" alt="B-64">
+                <span class="scale-label">64px</span>
+              </div>
+              <div class="scale-item">
+                <img class="icon-preview-img icon-32" src="concepts/concept-b.svg" alt="B-32">
+                <span class="scale-label">32px</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 方案 C 深色缩放 -->
+          <div class="stage-column">
+            <div class="stage-col-header" style="color: #34d399;">方案 C「软件魔方」</div>
+            <div class="scales-row">
+              <div class="scale-item">
+                <img class="icon-preview-img icon-256" src="concepts/concept-c.svg" alt="C-256">
+                <span class="scale-label">256px</span>
+              </div>
+              <div class="scale-item">
+                <img class="icon-preview-img icon-128" src="concepts/concept-c.svg" alt="C-128">
+                <span class="scale-label">128px</span>
+              </div>
+              <div class="scale-item">
+                <img class="icon-preview-img icon-64" src="concepts/concept-c.svg" alt="C-64">
+                <span class="scale-label">64px</span>
+              </div>
+              <div class="scale-item">
+                <img class="icon-preview-img icon-32" src="concepts/concept-c.svg" alt="C-32">
+                <span class="scale-label">32px</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 方案综合对比指标 -->
+    <h3 style="font-size: 20px; font-weight: 700; margin-bottom: 14px;">📊 方案综合评估表</h3>
+    <table class="analysis-table">
+      <thead>
+        <tr>
+          <th>评估维度</th>
+          <th>方案 A「双箭头循环」⭐</th>
+          <th>方案 B「盾牌+勾」</th>
+          <th>方案 C「软件魔方」</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>主视觉语义</strong></td>
+          <td class="highlight-cell">更新闭环 + M 字母标识</td>
+          <td>安全护盾 + 验证通过</td>
+          <td>应用模块堆叠 + 负空间 M</td>
+        </tr>
+        <tr>
+          <td><strong>与 MSI 产品匹配度</strong></td>
+          <td class="highlight-cell">极高（聚合更新是高频第一诉求）</td>
+          <td>高（强调无害、可信、干净）</td>
+          <td>高（强调软件清单与模块清理）</td>
+        </tr>
+        <tr>
+          <td><strong>小尺寸辨识度 (32px)</strong></td>
+          <td class="highlight-cell">优秀（线条粗壮、外轮廓鲜明）</td>
+          <td>优秀（盾形与粗对勾反差鲜明）</td>
+          <td>良好（需配合高对比度发光层）</td>
+        </tr>
+        <tr>
+          <td><strong>拟物与现代感平衡</strong></td>
+          <td class="highlight-cell">极佳（光带曲面 + 极光氛围）</td>
+          <td>沉稳（经典双切面 3D 护盾）</td>
+          <td>先锋（多层半透磨砂玻璃）</td>
+        </tr>
+        <tr>
+          <td><strong>推荐指数</strong></td>
+          <td class="highlight-cell">★★★★★（首选）</td>
+          <td>★★★★☆（备选·安全稳健）</td>
+          <td>★★★★☆（备选·艺术前卫）</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <footer>
+      MSI (Mac Software Index / Manager) · 纯手工 SVG 设计规范文件 · 遵循 macOS Human Interface Guidelines
+    </footer>
+  </div>
+</body>
+</html>

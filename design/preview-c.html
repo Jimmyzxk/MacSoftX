@@ -1,0 +1,1074 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MSI - 方案 C 精修演化版与菜单栏变体对比预览</title>
+  <style>
+    :root {
+      --font-sans: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
+      --font-mono: "SF Mono", Menlo, Monaco, Consolas, monospace;
+      --color-accent: #0a84ff;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--font-sans);
+      background: #0d1117;
+      color: #f0f6fc;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      padding-bottom: 80px;
+    }
+
+    .container {
+      max-width: 1360px;
+      margin: 0 auto;
+      padding: 40px 24px;
+    }
+
+    header {
+      margin-bottom: 40px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      padding-bottom: 28px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .nav-link {
+      font-size: 13px;
+      color: #58a6ff;
+      text-decoration: none;
+      padding: 4px 10px;
+      background: rgba(88, 166, 255, 0.1);
+      border-radius: 6px;
+      border: 1px solid rgba(88, 166, 255, 0.2);
+    }
+
+    .nav-link:hover {
+      background: rgba(88, 166, 255, 0.2);
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      background: rgba(0, 229, 255, 0.15);
+      color: #00e5ff;
+      border: 1px solid rgba(0, 229, 255, 0.3);
+      margin-bottom: 12px;
+    }
+
+    h1 {
+      font-size: 32px;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      margin-bottom: 10px;
+    }
+
+    .subtitle {
+      font-size: 15px;
+      color: #8b949e;
+      max-width: 900px;
+    }
+
+    /* 三卡片横排概览 */
+    .concepts-overview {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-bottom: 48px;
+    }
+
+    .concept-card {
+      background: rgba(22, 27, 34, 0.85);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 18px;
+      padding: 24px;
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.35);
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.2s ease, border-color 0.2s ease;
+    }
+
+    .concept-card:hover {
+      transform: translateY(-2px);
+      border-color: rgba(0, 229, 255, 0.5);
+    }
+
+    .concept-card.highlight {
+      border-color: #00e5ff;
+      box-shadow: 0 12px 36px rgba(0, 229, 255, 0.2);
+    }
+
+    .card-badge {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 999px;
+    }
+
+    .badge-original {
+      background: rgba(255, 255, 255, 0.12);
+      color: #c9d1d9;
+    }
+
+    .badge-c1 {
+      background: linear-gradient(135deg, #007aff, #00c7be);
+      color: #ffffff;
+      box-shadow: 0 2px 8px rgba(0, 122, 255, 0.4);
+    }
+
+    .badge-c2 {
+      background: linear-gradient(135deg, #00c7be, #00f5d4);
+      color: #051026;
+      box-shadow: 0 2px 8px rgba(0, 229, 255, 0.4);
+    }
+
+    .concept-hero-icon {
+      width: 160px;
+      height: 160px;
+      margin: 12px auto 20px auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .concept-hero-icon img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      filter: drop-shadow(0 14px 20px rgba(0, 0, 0, 0.45));
+    }
+
+    .concept-title {
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 6px;
+      color: #ffffff;
+    }
+
+    .concept-subtitle {
+      font-size: 13px;
+      font-weight: 500;
+      color: #00e5ff;
+      margin-bottom: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .concept-desc {
+      font-size: 13.5px;
+      color: #c9d1d9;
+      background: rgba(13, 17, 23, 0.6);
+      padding: 12px 14px;
+      border-radius: 10px;
+      border-left: 3px solid #00e5ff;
+      margin-bottom: 14px;
+      line-height: 1.55;
+    }
+
+    .specs-list {
+      list-style: none;
+      font-size: 12.5px;
+      color: #8b949e;
+      margin-top: auto;
+      padding-top: 12px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .specs-list li {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .specs-list strong {
+      color: #f0f6fc;
+    }
+
+    /* 展台分栏（浅色/深色环境） */
+    .showcase-section {
+      margin-bottom: 48px;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 18px;
+    }
+
+    .section-title {
+      font-size: 21px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .section-desc {
+      font-size: 13.5px;
+      color: #8b949e;
+    }
+
+    /* 浅色环境展示栏 */
+    .environment-stage.light-mode {
+      background: linear-gradient(180deg, #f5f5f7 0%, #e5e5ea 100%);
+      border: 1px solid #d1d1d6;
+      border-radius: 24px;
+      padding: 34px 28px;
+      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.15);
+      color: #1d1d1f;
+    }
+
+    /* 深色环境展示栏 */
+    .environment-stage.dark-mode {
+      background: linear-gradient(180deg, #1e1e1e 0%, #121212 100%);
+      border: 1px solid #333333;
+      border-radius: 24px;
+      padding: 34px 28px;
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.55);
+      color: #f5f5f7;
+    }
+
+    .stage-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+    }
+
+    .stage-column {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .stage-col-header {
+      font-size: 14.5px;
+      font-weight: 600;
+      margin-bottom: 22px;
+      padding-bottom: 8px;
+      border-bottom: 2px solid rgba(0, 122, 255, 0.3);
+      width: 100%;
+      text-align: center;
+    }
+
+    .scales-row {
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      gap: 18px;
+      width: 100%;
+      padding: 10px 0;
+    }
+
+    .scale-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .scale-label {
+      font-size: 11px;
+      font-family: var(--font-mono);
+      font-weight: 600;
+      opacity: 0.7;
+    }
+
+    .icon-256 {
+      width: 136px;
+      height: 136px;
+    }
+
+    .icon-128 {
+      width: 76px;
+      height: 76px;
+    }
+
+    .icon-64 {
+      width: 42px;
+      height: 42px;
+    }
+
+    .icon-32 {
+      width: 24px;
+      height: 24px;
+    }
+
+    .icon-preview-img {
+      object-fit: contain;
+      display: block;
+      transition: transform 0.15s ease;
+    }
+
+    .icon-preview-img:hover {
+      transform: scale(1.06);
+    }
+
+    /* 差异对比表 */
+    .diff-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 24px;
+      background: #161b22;
+      border-radius: 14px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .diff-table th, .diff-table td {
+      padding: 14px 18px;
+      text-align: left;
+      font-size: 13.5px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .diff-table th {
+      background: rgba(255, 255, 255, 0.04);
+      font-weight: 600;
+      color: #8b949e;
+    }
+
+    .tag-blue {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 4px;
+      background: rgba(10, 132, 255, 0.15);
+      color: #58a6ff;
+      font-size: 12px;
+    }
+
+    .tag-cyan {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 4px;
+      background: rgba(0, 229, 255, 0.15);
+      color: #00e5ff;
+      font-size: 12px;
+    }
+
+    /* ========================================= */
+    /* 菜单栏专项模块样式 (Menu Bar Simulator) */
+    /* ========================================= */
+    .menubar-section {
+      margin-top: 60px;
+      margin-bottom: 48px;
+      border-top: 2px dashed rgba(255, 255, 255, 0.15);
+      padding-top: 48px;
+    }
+
+    .menubar-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 28px;
+      margin-bottom: 32px;
+    }
+
+    .menu-card {
+      background: rgba(22, 27, 34, 0.9);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 18px;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .menu-card.preferred {
+      border-color: #00e5ff;
+      box-shadow: 0 8px 30px rgba(0, 229, 255, 0.18);
+    }
+
+    .menu-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    .menu-card-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: #ffffff;
+    }
+
+    .menu-badge {
+      font-size: 11px;
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: 999px;
+    }
+
+    .menu-desc {
+      font-size: 13.5px;
+      color: #c9d1d9;
+      background: rgba(13, 17, 23, 0.6);
+      padding: 12px 14px;
+      border-radius: 8px;
+      border-left: 3px solid #00e5ff;
+      margin-bottom: 20px;
+      line-height: 1.5;
+    }
+
+    /* macOS 真实菜单栏模拟条 */
+    .mock-menubar {
+      height: 36px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 16px;
+      margin-bottom: 16px;
+      font-size: 13px;
+      font-weight: 500;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+      user-select: none;
+    }
+
+    .mock-menubar.light {
+      background: rgba(255, 255, 255, 0.75);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      color: #1d1d1f;
+      border: 1px solid rgba(0, 0, 0, 0.1);
+    }
+
+    .mock-menubar.dark {
+      background: rgba(36, 36, 38, 0.85);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      color: #f5f5f7;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+    }
+
+    .mock-left {
+      display: flex;
+      gap: 14px;
+      font-size: 12.5px;
+      opacity: 0.9;
+    }
+
+    .mock-apple {
+      font-weight: 700;
+      font-size: 14px;
+    }
+
+    .mock-right {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .app-status-item {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 3px 6px;
+      border-radius: 4px;
+      background: rgba(0, 122, 255, 0.15);
+      border: 1px solid rgba(0, 122, 255, 0.3);
+    }
+
+    .mock-menubar.light .menuicon-img {
+      filter: none; /* 原生纯黑 */
+    }
+
+    .mock-menubar.dark .menuicon-img {
+      filter: invert(1); /* 模拟 macOS 自动反色为纯白 Template */
+    }
+
+    .mock-sys-icon {
+      font-size: 13px;
+      opacity: 0.8;
+    }
+
+    /* 多档尺寸横向排列 */
+    .menu-scales-box {
+      background: rgba(13, 17, 23, 0.7);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 10px;
+      padding: 16px;
+      margin-top: 14px;
+    }
+
+    .menu-scales-title {
+      font-size: 12px;
+      font-weight: 600;
+      color: #8b949e;
+      margin-bottom: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .menu-scale-items {
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+    }
+
+    .scale-bubble {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .scale-preview-chip {
+      background: #ffffff;
+      border-radius: 6px;
+      padding: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    }
+
+    .scale-preview-chip.dark-chip {
+      background: #22272e;
+    }
+
+    .scale-preview-chip.dark-chip img {
+      filter: invert(1);
+    }
+
+    .scale-size-tag {
+      font-size: 11px;
+      font-family: var(--font-mono);
+      color: #8b949e;
+    }
+
+    footer {
+      margin-top: 60px;
+      text-align: center;
+      font-size: 13px;
+      color: #6e7681;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      padding-top: 24px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="nav-links">
+        <a href="preview.html" class="nav-link">← 返回初版三方案总览 (A / B / C)</a>
+        <a href="#menubar-section" class="nav-link" style="background: rgba(0, 229, 255, 0.15); color: #00e5ff; border-color: rgba(0, 229, 255, 0.3);">直达菜单栏模板图标对比 ↓</a>
+      </div>
+      <span class="badge">方案 C 专属精修演化与菜单栏衍生</span>
+      <h1>MSI「软件魔方」精修版、演化版与菜单栏变体全景对比</h1>
+      <p class="subtitle">响应监工指令：基于方案 C 打造 App Icon 演化版（C2），并全新衍生纯黑单色 32×32 菜单栏状态栏模板图标（Menu Bar Template Icon），彻底解决通用循环箭头带来的“缺乏品牌辨识度”痛点。</p>
+    </header>
+
+    <!-- 三方案并排概览卡片 -->
+    <div class="concepts-overview">
+      <!-- 原版 C -->
+      <div class="concept-card">
+        <span class="card-badge badge-original">基准原版</span>
+        <div class="concept-hero-icon">
+          <img src="concepts/concept-c.svg" alt="原版 C 软件魔方">
+        </div>
+        <h2 class="concept-title">原版 C「软件魔方」</h2>
+        <div class="concept-subtitle">初版构想 · 蓝/青绿/白三色</div>
+        <div class="concept-desc">
+          三枚圆角应用方块悬浮交叠，克制调和蓝、青绿与冰透白，以负空间自然勾勒 M 字母。
+        </div>
+        <ul class="specs-list">
+          <li><span>方块圆角：</span><strong>rx = 42（较圆润）</strong></li>
+          <li><span>两翼间隙：</span><strong>192px 基准间隙</strong></li>
+          <li><span>顶部元素：</span><strong>210px 冰透白菱形</strong></li>
+          <li><span>色系分布：</span><strong>蓝 + 薄荷绿 + 白</strong></li>
+        </ul>
+      </div>
+
+      <!-- 精修版 C1 -->
+      <div class="concept-card highlight">
+        <span class="card-badge badge-c1">精修版 · 极致负空间</span>
+        <div class="concept-hero-icon">
+          <img src="concepts/concept-c1.svg" alt="方案 C1 精修版">
+        </div>
+        <h2 class="concept-title">方案 C1「精修版」</h2>
+        <div class="concept-subtitle">间隙扩大 8% · 锐化 · 蓝青收敛</div>
+        <div class="concept-desc">
+          方块轮廓收至 rx=32 更具工程精密度，间隙扩大 8.3% 并强化 M 负空间光感，顶部菱形微调收敛，色系全面回归系统蓝至高亮青族。
+        </div>
+        <ul class="specs-list">
+          <li><span>方块圆角：</span><strong>rx = 32（更硬朗锐利）</strong></li>
+          <li><span>两翼间隙：</span><strong>208px（间隙加大 8.3%）</strong></li>
+          <li><span>顶部元素：</span><strong>164px 紧凑柔光冰晶菱形</strong></li>
+          <li><span>色系分布：</span><strong>系统蓝 → 高亮青统一渐变</strong></li>
+        </ul>
+      </div>
+
+      <!-- 演化版 C2 -->
+      <div class="concept-card highlight">
+        <span class="card-badge badge-c2">演化版 · 最终选定</span>
+        <div class="concept-hero-icon">
+          <img src="concepts/concept-c2.svg" alt="方案 C2 演化版">
+        </div>
+        <h2 class="concept-title">方案 C2「演化版」</h2>
+        <div class="concept-subtitle">魔方基座 + 青色循环双箭头徽记</div>
+        <div class="concept-desc">
+          完全继承 C1 锐利轮廓与蓝青同族渐变，将顶部菱形演化为高精度青色循环箭头微透镜徽记，强力呼应「聚合更新与管理」第一心智。
+        </div>
+        <ul class="specs-list">
+          <li><span>方块圆角：</span><strong>rx = 32（锐利工程感）</strong></li>
+          <li><span>两翼间隙：</span><strong>208px（负空间大通道）</strong></li>
+          <li><span>顶部元素：</span><strong>青色循环双箭头小徽记</strong></li>
+          <li><span>色系分布：</span><strong>系统蓝 → 高亮青统一渐变</strong></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 1. 浅色环境展示行 (Light Mode) -->
+    <div class="showcase-section">
+      <div class="section-header">
+        <h3 class="section-title">☀️ 浅色环境展示 (macOS Light Mode)</h3>
+        <span class="section-desc">验证在浅色壁纸下，各变体 256 / 128 / 64 / 32 四档尺寸的边缘对比度与 M 负空间辨识表现</span>
+      </div>
+      <div class="environment-stage light-mode">
+        <div class="stage-grid">
+          <!-- 原版 C 浅色缩放 -->
+          <div class="stage-column">
+            <div class="stage-col-header" style="color: #4b5563;">原版 C「软件魔方」</div>
+            <div class="scales-row">
+              <div class="scale-item">
+                <img class="icon-preview-img icon-256" src="concepts/concept-c.svg" alt="C-256">
+                <span class="scale-label">256px</span>
+              </div>
+              <div class="scale-item">
+                <img class="icon-preview-img icon-128" src="concepts/concept-c.svg" alt="C-128">
+                <span class="scale-label">128px</span>
+              </div>
+              <div class="scale-item">
+                <img class="icon-preview-img icon-64" src="concepts/concept-c.svg" alt="C-64">
+                <span class="scale-label">64px</span>
+              </div>
+              <div class="scale-item">
+                <img class="icon-preview-img icon-32" src="concepts/concept-c.svg" alt="C-32">
+                <span class="scale-label">32px</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 精修版 C1 浅色缩放 -->
+          <div class="stage-column">
+            <div class="stage-col-header" style="color: #0055ff;">方案 C1「精修版」</div>
+            <div class="scales-row">
+              <div class="scale-item">
+                <img class="icon-preview-img icon-256" src="concepts/concept-c1.svg" alt="C1-256">
+                <span class="scale-label">256px</span>
+              </div>
+              <div class="scale-item">
+                <img class="icon-preview-img icon-128" src="concepts/concept-c1.svg" alt="C1-128">
+                <span class="scale-label">128px</span>
+              </div>
+              <div class="scale-item">
+                <img class="icon-preview-img icon-64" src="concepts/concept-c1.svg" alt="C1-64">
+                <span class="scale-label">64px</span>
+              </div>
+              <div class="scale-item">
+                <img class="icon-preview-img icon-32" src="concepts/concept-c1.svg" alt="C1-32">
+                <span class="scale-label">32px</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 演化版 C2 浅色缩放 -->
+          <div class="stage-column">
+            <div class="stage-col-header" style="color: #00c7be;">方案 C2「演化版」</div>
+            <div class="scales-row">
+              <div class="scale-item">
+                <img class="icon-preview-img icon-256" src="concepts/concept-c2.svg" alt="C2-256">
+                <span class="scale-label">256px</span>
+              </div>
+              <div class="scale-item">
+                <img class="icon-preview-img icon-128" src="concepts/concept-c2.svg" alt="C2-128">
+                <span class="scale-label">128px</span>
+              </div>
+              <div class="scale-item">
+                <img class="icon-preview-img icon-64" src="concepts/concept-c2.svg" alt="C2-64">
+                <span class="scale-label">64px</span>
+              </div>
+              <div class="scale-item">
+                <img class="icon-preview-img icon-32" src="concepts/concept-c2.svg" alt="C2-32">
+                <span class="scale-label">32px</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2. 深色环境展示行 (Dark Mode) -->
+    <div class="showcase-section">
+      <div class="section-header">
+        <h3 class="section-title">🌙 深色环境展示 (macOS Dark Mode)</h3>
+        <span class="section-desc">模拟深色模式环境，观察发光负空间通道、高光切线与玻璃自发光层次</span>
+      </div>
+      <div class="environment-stage dark-mode">
+        <div class="stage-grid">
+          <!-- 原版 C 深色缩放 -->
+          <div class="stage-column">
+            <div class="stage-col-header" style="color: #8b949e;">原版 C「软件魔方」</div>
+            <div class="scales-row">
+              <div class="scale-item">
+                <img class="icon-preview-img icon-256" src="concepts/concept-c.svg" alt="C-256">
+                <span class="scale-label">256px</span>
+              </div>
+              <div class="scale-item">
+                <img class="icon-preview-img icon-128" src="concepts/concept-c.svg" alt="C-128">
+                <span class="scale-label">128px</span>
+              </div>
+              <div class="scale-item">
+                <img class="icon-preview-img icon-64" src="concepts/concept-c.svg" alt="C-64">
+                <span class="scale-label">64px</span>
+              </div>
+              <div class="scale-item">
+                <img class="icon-preview-img icon-32" src="concepts/concept-c.svg" alt="C-32">
+                <span class="scale-label">32px</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 精修版 C1 深色缩放 -->
+          <div class="stage-column">
+            <div class="stage-col-header" style="color: #38bdf8;">方案 C1「精修版」</div>
+            <div class="scales-row">
+              <div class="scale-item">
+                <img class="icon-preview-img icon-256" src="concepts/concept-c1.svg" alt="C1-256">
+                <span class="scale-label">256px</span>
+              </div>
+              <div class="scale-item">
+                <img class="icon-preview-img icon-128" src="concepts/concept-c1.svg" alt="C1-128">
+                <span class="scale-label">128px</span>
+              </div>
+              <div class="scale-item">
+                <img class="icon-preview-img icon-64" src="concepts/concept-c1.svg" alt="C1-64">
+                <span class="scale-label">64px</span>
+              </div>
+              <div class="scale-item">
+                <img class="icon-preview-img icon-32" src="concepts/concept-c1.svg" alt="C1-32">
+                <span class="scale-label">32px</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 演化版 C2 深色缩放 -->
+          <div class="stage-column">
+            <div class="stage-col-header" style="color: #00f5d4;">方案 C2「演化版」</div>
+            <div class="scales-row">
+              <div class="scale-item">
+                <img class="icon-preview-img icon-256" src="concepts/concept-c2.svg" alt="C2-256">
+                <span class="scale-label">256px</span>
+              </div>
+              <div class="scale-item">
+                <img class="icon-preview-img icon-128" src="concepts/concept-c2.svg" alt="C2-128">
+                <span class="scale-label">128px</span>
+              </div>
+              <div class="scale-item">
+                <img class="icon-preview-img icon-64" src="concepts/concept-c2.svg" alt="C2-64">
+                <span class="scale-label">64px</span>
+              </div>
+              <div class="scale-item">
+                <img class="icon-preview-img icon-32" src="concepts/concept-c2.svg" alt="C2-32">
+                <span class="scale-label">32px</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 变体差异点横向对比表 -->
+    <h3 style="font-size: 20px; font-weight: 700; margin-bottom: 14px;">🔍 精修与演化差异点对照</h3>
+    <table class="diff-table">
+      <thead>
+        <tr>
+          <th>维度</th>
+          <th>原版 C</th>
+          <th>方案 C1（精修版）</th>
+          <th>方案 C2（演化版）</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>视觉风格倾向</strong></td>
+          <td>抽象、柔和、模块堆叠感</td>
+          <td><span class="tag-blue">精炼、硬朗、纯几何负空间</span></td>
+          <td><span class="tag-cyan">功能直达、品牌与业务语义双全</span></td>
+        </tr>
+        <tr>
+          <td><strong>中央顶部核心元素</strong></td>
+          <td>210×210 宽体半透明冰透白菱形</td>
+          <td>164×164 紧凑型高透微光菱形</td>
+          <td>76r 透光圆盘 + 青色双循环更新箭头</td>
+        </tr>
+        <tr>
+          <td><strong>两翼方块轮廓与间距</strong></td>
+          <td>圆角 rx=42，间距 192px</td>
+          <td>圆角收至 rx=32，间隙加大 8.3% 至 208px</td>
+          <td>继承 C1 规格（rx=32，间距 208px）</td>
+        </tr>
+        <tr>
+          <td><strong>M 负空间反差度</strong></td>
+          <td>中等（依赖常规背光）</td>
+          <td>大幅增强（双层高斯光晕 + 8px 纯白高光线）</td>
+          <td>大幅增强（双层高斯光晕 + 8px 纯白高光线）</td>
+        </tr>
+        <tr>
+          <td><strong>品牌色彩收敛度</strong></td>
+          <td>蓝 + 薄荷绿 + 冰透白（多色偏散）</td>
+          <td>统一为蓝→青色系（与方案 A 同族，极致协调）</td>
+          <td>统一为蓝→青色系（与方案 A 同族，极致协调）</td>
+        </tr>
+        <tr>
+          <td><strong>更新管理第一心智</strong></td>
+          <td>无直接更新符号，纯应用包隐喻</td>
+          <td>隐喻化（通过负空间 M 传递）</td>
+          <td>显式强化（双循环箭头一眼即知“更新/同步”）</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- ============================================================== -->
+    <!-- 3. 菜单栏状态栏模板图标专项模块 (Menu Bar Template Simulator) -->
+    <!-- ============================================================== -->
+    <div class="menubar-section" id="menubar-section">
+      <div class="section-header">
+        <div>
+          <span class="badge" style="background: rgba(10, 132, 255, 0.15); color: #58a6ff; border-color: rgba(10, 132, 255, 0.3);">macOS 菜单栏专属衍生</span>
+          <h2 style="font-size: 26px; font-weight: 700; margin-top: 4px;">🖥️ 菜单栏模板变体对比 (Menu Bar Template Variants)</h2>
+        </div>
+        <span class="section-desc">严格遵循 macOS Menu Bar 模板规范（viewBox 32×32，纯黑单色剪影，透明背景，系统自动反色适配深浅模式）</span>
+      </div>
+
+      <div class="menubar-grid">
+        <!-- 变体 1: menuicon-macsoftx.svg (首推) -->
+        <div class="menu-card preferred">
+          <div class="menu-card-header">
+            <h3 class="menu-card-title">变体一：`menuicon-macsoftx.svg`</h3>
+            <span class="menu-badge" style="background: #00e5ff; color: #041026;">🔥 推荐首选 · C2 同构</span>
+          </div>
+          <div class="menu-desc">
+            <strong>C2 专属骨架映射</strong>：完整提炼 C2 的「左右双圆角竖片 + 中央双循环更新箭头」骨架。舍弃微弱渐变与倒角细节，强化箭头描边与双竖片留白间隙（14px 宽幅通道），在 16px 极限物理像素下既能清晰读出“双模块包夹更新箭头”，又能感知 M 负空间。
+          </div>
+
+          <!-- 浅色菜单栏模拟条 -->
+          <div style="font-size: 11px; font-weight: 600; color: #8b949e; margin-bottom: 6px;">macOS 浅色菜单栏模拟 (Light Menu Bar)</div>
+          <div class="mock-menubar light">
+            <div class="mock-left">
+              <span class="mock-apple"></span>
+              <span>访达</span>
+              <span>文件</span>
+              <span>编辑</span>
+              <span>显示</span>
+            </div>
+            <div class="mock-right">
+              <div class="app-status-item" title="MSI 菜单栏驻留角标">
+                <img class="menuicon-img" src="concepts/menuicon-macsoftx.svg" width="18" height="18" alt="MSI Menu Icon">
+              </div>
+              <span class="mock-sys-icon">􀙇</span>
+              <span class="mock-sys-icon">􀛨</span>
+              <span class="mock-sys-icon">􀖂</span>
+              <span style="font-size: 12px; font-weight: 500;">9:41</span>
+            </div>
+          </div>
+
+          <!-- 深色菜单栏模拟条 -->
+          <div style="font-size: 11px; font-weight: 600; color: #8b949e; margin-bottom: 6px;">macOS 深色菜单栏模拟 (Dark Menu Bar / Template 自动反白)</div>
+          <div class="mock-menubar dark">
+            <div class="mock-left">
+              <span class="mock-apple"></span>
+              <span>访达</span>
+              <span>文件</span>
+              <span>编辑</span>
+              <span>显示</span>
+            </div>
+            <div class="mock-right">
+              <div class="app-status-item" style="background: rgba(255, 255, 255, 0.1); border-color: rgba(255, 255, 255, 0.2);" title="MSI 菜单栏驻留角标">
+                <img class="menuicon-img" src="concepts/menuicon-macsoftx.svg" width="18" height="18" alt="MSI Menu Icon">
+              </div>
+              <span class="mock-sys-icon">􀙇</span>
+              <span class="mock-sys-icon">􀛨</span>
+              <span class="mock-sys-icon">􀖂</span>
+              <span style="font-size: 12px; font-weight: 500;">9:41</span>
+            </div>
+          </div>
+
+          <!-- 多档尺寸缩放 -->
+          <div class="menu-scales-box">
+            <div class="menu-scales-title">多档位物理尺寸渲染效果</div>
+            <div class="menu-scale-items">
+              <div class="scale-bubble">
+                <div class="scale-preview-chip">
+                  <img src="concepts/menuicon-macsoftx.svg" width="32" height="32" alt="32px">
+                </div>
+                <span class="scale-size-tag">32px (2x)</span>
+              </div>
+              <div class="scale-bubble">
+                <div class="scale-preview-chip">
+                  <img src="concepts/menuicon-macsoftx.svg" width="22" height="22" alt="22px">
+                </div>
+                <span class="scale-size-tag">22px (Bar)</span>
+              </div>
+              <div class="scale-bubble">
+                <div class="scale-preview-chip">
+                  <img src="concepts/menuicon-macsoftx.svg" width="18" height="18" alt="18px">
+                </div>
+                <span class="scale-size-tag">18px (Opt)</span>
+              </div>
+              <div class="scale-bubble">
+                <div class="scale-preview-chip">
+                  <img src="concepts/menuicon-macsoftx.svg" width="16" height="16" alt="16px">
+                </div>
+                <span class="scale-size-tag">16px (1x)</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 变体 2: menuicon-m.svg (备选) -->
+        <div class="menu-card">
+          <div class="menu-card-header">
+            <h3 class="menu-card-title">变体二：`menuicon-m.svg`</h3>
+            <span class="menu-badge" style="background: rgba(255, 255, 255, 0.15); color: #f0f6fc;">纯几何备选 · M 字标</span>
+          </div>
+          <div class="menu-desc">
+            <strong>M 负空间纯剪影</strong>：由左右双竖片与顶部中心悬浮菱形组成。不包含具体功能符号，纯粹利用几何实体间隙形成 45° 斜角负空间通道，自然刻画出醒目的粗体「M」字母，具备极简主义的高级感与纯粹性。
+          </div>
+
+          <!-- 浅色菜单栏模拟条 -->
+          <div style="font-size: 11px; font-weight: 600; color: #8b949e; margin-bottom: 6px;">macOS 浅色菜单栏模拟 (Light Menu Bar)</div>
+          <div class="mock-menubar light">
+            <div class="mock-left">
+              <span class="mock-apple"></span>
+              <span>访达</span>
+              <span>文件</span>
+              <span>编辑</span>
+              <span>显示</span>
+            </div>
+            <div class="mock-right">
+              <div class="app-status-item" title="MSI 菜单栏驻留角标">
+                <img class="menuicon-img" src="concepts/menuicon-m.svg" width="18" height="18" alt="MSI Menu Icon M">
+              </div>
+              <span class="mock-sys-icon">􀙇</span>
+              <span class="mock-sys-icon">􀛨</span>
+              <span class="mock-sys-icon">􀖂</span>
+              <span style="font-size: 12px; font-weight: 500;">9:41</span>
+            </div>
+          </div>
+
+          <!-- 深色菜单栏模拟条 -->
+          <div style="font-size: 11px; font-weight: 600; color: #8b949e; margin-bottom: 6px;">macOS 深色菜单栏模拟 (Dark Menu Bar / Template 自动反白)</div>
+          <div class="mock-menubar dark">
+            <div class="mock-left">
+              <span class="mock-apple"></span>
+              <span>访达</span>
+              <span>文件</span>
+              <span>编辑</span>
+              <span>显示</span>
+            </div>
+            <div class="mock-right">
+              <div class="app-status-item" style="background: rgba(255, 255, 255, 0.1); border-color: rgba(255, 255, 255, 0.2);" title="MSI 菜单栏驻留角标">
+                <img class="menuicon-img" src="concepts/menuicon-m.svg" width="18" height="18" alt="MSI Menu Icon M">
+              </div>
+              <span class="mock-sys-icon">􀙇</span>
+              <span class="mock-sys-icon">􀛨</span>
+              <span class="mock-sys-icon">􀖂</span>
+              <span style="font-size: 12px; font-weight: 500;">9:41</span>
+            </div>
+          </div>
+
+          <!-- 多档尺寸缩放 -->
+          <div class="menu-scales-box">
+            <div class="menu-scales-title">多档位物理尺寸渲染效果</div>
+            <div class="menu-scale-items">
+              <div class="scale-bubble">
+                <div class="scale-preview-chip">
+                  <img src="concepts/menuicon-m.svg" width="32" height="32" alt="32px">
+                </div>
+                <span class="scale-size-tag">32px (2x)</span>
+              </div>
+              <div class="scale-bubble">
+                <div class="scale-preview-chip">
+                  <img src="concepts/menuicon-m.svg" width="22" height="22" alt="22px">
+                </div>
+                <span class="scale-size-tag">22px (Bar)</span>
+              </div>
+              <div class="scale-bubble">
+                <div class="scale-preview-chip">
+                  <img src="concepts/menuicon-m.svg" width="18" height="18" alt="18px">
+                </div>
+                <span class="scale-size-tag">18px (Opt)</span>
+              </div>
+              <div class="scale-bubble">
+                <div class="scale-preview-chip">
+                  <img src="concepts/menuicon-m.svg" width="16" height="16" alt="16px">
+                </div>
+                <span class="scale-size-tag">16px (1x)</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 菜单栏变体差异对照表 -->
+      <table class="diff-table" style="margin-top: 20px;">
+        <thead>
+          <tr>
+            <th>维度</th>
+            <th>变体一：menuicon-macsoftx.svg（推荐首选）</th>
+            <th>变体二：menuicon-m.svg（几何备选）</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>与 App 主图标对应关系</strong></td>
+            <td><span class="tag-cyan">与主选方案 C2 完全同构（双片+循环徽记）</span></td>
+            <td>与方案 C1 / 原版 C 几何对应（双片+菱形）</td>
+          </tr>
+          <tr>
+            <td><strong>品牌与业务辨识</strong></td>
+            <td>一眼识别为“带有 MSI 魔方特征的软件更新器”，摆脱通用箭头平庸感</td>
+            <td>呈现极致抽象的 M 品牌字标，纯粹但缺少更新动作指示</td>
+          </tr>
+          <tr>
+            <td><strong>16px 极限物理渲染</strong></td>
+            <td>加粗 1.8px 箭身与 3.6px 箭头，保留 3px 安全间隙，不糊不粘</td>
+            <td>三块实心黑几何实体，高反差 45° 负空间通道，极度清晰</td>
+          </tr>
+          <tr>
+            <td><strong>系统深浅自适应</strong></td>
+            <td>纯黑 + 透明背景，100% 兼容 NSStatusItem.button.image.isTemplate</td>
+            <td>纯黑 + 透明背景，100% 兼容 NSStatusItem.button.image.isTemplate</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <footer>
+      MSI (Mac Software Index / Manager) · 方案 C 精修演化与菜单栏衍生交付物 · 严格遵循 macOS Human Interface Guidelines
+    </footer>
+  </div>
+</body>
+</html>

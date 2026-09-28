@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32">
+  <!-- macOS Menu Bar Template Icon: concept-c2 Variant (双圆角竖片 + 循环更新徽记) -->
+  <!-- Pure black silhouette (#000000) on transparent background for system auto-tinting -->
+
+  <!-- Left Pillar (rx=2.25) -->
+  <rect x="4.5" y="6" width="4.5" height="20" rx="2.25" fill="#000000" />
+
+  <!-- Right Pillar (rx=2.25) -->
+  <rect x="23" y="6" width="4.5" height="20" rx="2.25" fill="#000000" />
+
+  <!-- Center Update Cycle Element (呼应 C2 核心更新徽记) -->
+  <!-- Upper Clockwise Arc -->
+  <path d="M 12 13.2 A 4 4 0 0 1 19.5 12" fill="none" stroke="#000000" stroke-width="1.8" stroke-linecap="round" />
+  <!-- Upper Arrowhead (Pointing down-right) -->
+  <polygon points="20.4,14.8 21.8,11.2 18.2,11.8" fill="#000000" />
+
+  <!-- Lower Clockwise Arc -->
+  <path d="M 20 13.8 A 4 4 0 0 1 12.5 15" fill="none" stroke="#000000" stroke-width="1.8" stroke-linecap="round" />
+  <!-- Lower Arrowhead (Pointing up-left) -->
+  <polygon points="11.6,12.2 10.2,15.8 13.8,15.2" fill="#000000" />
+
+  <!-- Center Precision Axis Dot -->
+  <circle cx="16" cy="13.5" r="1.1" fill="#000000" />
+</svg>

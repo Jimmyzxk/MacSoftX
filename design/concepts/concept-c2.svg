@@ -1,0 +1,219 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1024" height="1024">
+  <defs>
+    <!-- macOS App Icon Drop Shadows -->
+    <filter id="icon-shadow-c2" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="32" stdDeviation="36" flood-color="#00040e" flood-opacity="0.45" />
+      <feDropShadow dx="0" dy="12" stdDeviation="16" flood-color="#04091a" flood-opacity="0.25" />
+    </filter>
+
+    <!-- Block 3D Elevation Drop Shadows -->
+    <filter id="block-shadow-c2" x="-25%" y="-25%" width="150%" height="150%">
+      <feDropShadow dx="0" dy="20" stdDeviation="22" flood-color="#010614" flood-opacity="0.65" />
+      <feDropShadow dx="0" dy="6" stdDeviation="8" flood-color="#020a1f" flood-opacity="0.4" />
+    </filter>
+
+    <!-- Badge Shadow -->
+    <filter id="badge-shadow-c2" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="18" stdDeviation="20" flood-color="#00081a" flood-opacity="0.75" />
+      <feDropShadow dx="0" dy="6" stdDeviation="8" flood-color="#002b66" flood-opacity="0.4" />
+    </filter>
+
+    <!-- Enhanced M Negative Space Glow -->
+    <filter id="glow-m-c2" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="22" result="blur1" />
+      <feGaussianBlur stdDeviation="8" result="blur2" />
+      <feMerge>
+        <feMergeNode in="blur1" />
+        <feMergeNode in="blur2" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+
+    <filter id="arrow-glow-c2" x="-25%" y="-25%" width="150%" height="150%">
+      <feGaussianBlur stdDeviation="10" result="glow" />
+      <feMerge>
+        <feMergeNode in="glow" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+
+    <!-- Base Squircle Slate/Navy Gradient -->
+    <linearGradient id="bg-grad-c2" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#11192e" />
+      <stop offset="45%" stop-color="#0a1020" />
+      <stop offset="100%" stop-color="#04070f" />
+    </linearGradient>
+
+    <!-- Squircle Center Ambient Aurora -->
+    <radialGradient id="aurora-c2" cx="50%" cy="38%" r="65%">
+      <stop offset="0%" stop-color="#00e5ff" stop-opacity="0.25" />
+      <stop offset="45%" stop-color="#0a84ff" stop-opacity="0.2" />
+      <stop offset="100%" stop-color="#000000" stop-opacity="0" />
+    </radialGradient>
+
+    <!-- Squircle Bevel Highlight -->
+    <linearGradient id="squircle-rim-c2" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.45" />
+      <stop offset="25%" stop-color="#ffffff" stop-opacity="0.18" />
+      <stop offset="80%" stop-color="#ffffff" stop-opacity="0.04" />
+      <stop offset="100%" stop-color="#38bdf8" stop-opacity="0.18" />
+    </linearGradient>
+
+    <!-- Left Block: System Blue to Electric Blue (Scheme A Family) -->
+    <linearGradient id="block-left-c2" x1="10%" y1="0%" x2="90%" y2="100%">
+      <stop offset="0%" stop-color="#38bdf8" />
+      <stop offset="25%" stop-color="#0a84ff" />
+      <stop offset="70%" stop-color="#0055ff" />
+      <stop offset="100%" stop-color="#003db8" />
+    </linearGradient>
+
+    <!-- Right Block: Electric Blue to High-Luminance Cyan (Harmonized Gradient) -->
+    <linearGradient id="block-right-c2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00f5d4" />
+      <stop offset="35%" stop-color="#00c7be" />
+      <stop offset="75%" stop-color="#0a84ff" />
+      <stop offset="100%" stop-color="#0055ff" />
+    </linearGradient>
+
+    <!-- Badge Background Frosted Glass Gradient -->
+    <linearGradient id="badge-bg-grad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#14284d" stop-opacity="0.95" />
+      <stop offset="50%" stop-color="#0a1733" stop-opacity="0.92" />
+      <stop offset="100%" stop-color="#040b1a" stop-opacity="0.9" />
+    </linearGradient>
+
+    <!-- Badge Bevel Highlight -->
+    <linearGradient id="badge-rim-grad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.8" />
+      <stop offset="40%" stop-color="#00e5ff" stop-opacity="0.5" />
+      <stop offset="100%" stop-color="#007aff" stop-opacity="0.2" />
+    </linearGradient>
+
+    <!-- Arrow Gradient: High-Vibrancy Cyan -->
+    <linearGradient id="badge-arrow-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00f5d4" />
+      <stop offset="50%" stop-color="#00e5ff" />
+      <stop offset="100%" stop-color="#00c7be" />
+    </linearGradient>
+
+    <!-- Glass Rim Bevel for Blocks -->
+    <linearGradient id="bevel-light-c2" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.75" />
+      <stop offset="40%" stop-color="#ffffff" stop-opacity="0.2" />
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0.05" />
+    </linearGradient>
+
+    <!-- Diagonal Glass Sheen -->
+    <linearGradient id="glass-sweep-c2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.15" />
+      <stop offset="35%" stop-color="#ffffff" stop-opacity="0.04" />
+      <stop offset="65%" stop-color="#ffffff" stop-opacity="0" />
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0.06" />
+    </linearGradient>
+  </defs>
+
+  <!-- Base macOS Squircle with Ambient Shadows -->
+  <g filter="url(#icon-shadow-c2)">
+    <rect x="100" y="100" width="824" height="824" rx="185" ry="185" fill="url(#bg-grad-c2)" />
+    <!-- Center Cyan-Blue Aurora -->
+    <rect x="100" y="100" width="824" height="824" rx="185" ry="185" fill="url(#aurora-c2)" />
+    <!-- Diagonal Glass Sheen -->
+    <rect x="100" y="100" width="824" height="824" rx="185" ry="185" fill="url(#glass-sweep-c2)" />
+    <!-- 1.5px Squircle Rim Bevel -->
+    <rect x="101.5" y="101.5" width="821" height="821" rx="183.5" ry="183.5" fill="none" stroke="url(#squircle-rim-c2)" stroke-width="3" />
+  </g>
+
+  <!-- Ambient Micro-Grid lines -->
+  <g opacity="0.16">
+    <line x1="228" y1="512" x2="796" y2="512" stroke="#38bdf8" stroke-width="1.5" stroke-dasharray="6 8" />
+    <line x1="512" y1="260" x2="512" y2="760" stroke="#00c7be" stroke-width="1.5" stroke-dasharray="6 8" />
+    <circle cx="512" cy="512" r="280" fill="none" stroke="#ffffff" stroke-width="1" stroke-dasharray="4 12" />
+  </g>
+
+  <!-- HIGH-CONTRAST M NEGATIVE SPACE BACKLIGHT LAYER -->
+  <g filter="url(#glow-m-c2)" opacity="0.7">
+    <path d="M 318 715 L 318 385 L 512 525 L 706 385 L 706 715"
+          fill="none" stroke="#00e5ff" stroke-width="42" stroke-linecap="round" stroke-linejoin="round" />
+  </g>
+  <g opacity="0.85">
+    <path d="M 318 710 L 318 385 L 512 525 L 706 385 L 706 710"
+          fill="none" stroke="#ffffff" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" />
+  </g>
+
+  <!-- THREE MAIN MODULES (左右两块保留 C1 锐化规格，顶部替换为更新循环徽记) -->
+
+  <!-- BLOCK 1: Left Module (System Blue, x=228..408) -->
+  <g filter="url(#block-shadow-c2)">
+    <!-- Base Blue Rounded Block -->
+    <rect x="228" y="360" width="180" height="350" rx="32" fill="url(#block-left-c2)" />
+    <!-- Top Glass Rim Bevel -->
+    <rect x="229" y="361" width="178" height="348" rx="31" fill="none" stroke="url(#bevel-light-c2)" stroke-width="2.5" />
+    <!-- Inner Gloss Top Arc -->
+    <path d="M 236 396 C 236 376, 250 364, 270 364 L 366 364 C 386 364, 400 376, 400 396"
+          fill="none" stroke="#ffffff" stroke-width="3" stroke-linecap="round" opacity="0.6" />
+    <!-- Technical Status Bars -->
+    <rect x="264" y="632" width="108" height="8" rx="4" fill="#ffffff" opacity="0.3" />
+    <rect x="264" y="654" width="68" height="8" rx="4" fill="#ffffff" opacity="0.18" />
+  </g>
+
+  <!-- BLOCK 2: Right Module (Cyan Harmonized, x=616..796) -->
+  <g filter="url(#block-shadow-c2)">
+    <!-- Base Cyan Rounded Block -->
+    <rect x="616" y="360" width="180" height="350" rx="32" fill="url(#block-right-c2)" />
+    <!-- Top Glass Rim Bevel -->
+    <rect x="617" y="361" width="178" height="348" rx="31" fill="none" stroke="url(#bevel-light-c2)" stroke-width="2.5" />
+    <!-- Inner Gloss Top Arc -->
+    <path d="M 624 396 C 624 376, 638 364, 658 364 L 754 364 C 774 364, 788 376, 788 396"
+          fill="none" stroke="#ffffff" stroke-width="3" stroke-linecap="round" opacity="0.6" />
+    <!-- Technical Status Bars -->
+    <rect x="652" y="632" width="108" height="8" rx="4" fill="#ffffff" opacity="0.3" />
+    <rect x="652" y="654" width="60" height="8" rx="4" fill="#ffffff" opacity="0.18" />
+  </g>
+
+  <!-- BLOCK 3 (演化版核心): 青色循环箭头小徽记 (Centered at 512, 376, 呼应"更新管理"语义) -->
+  <g filter="url(#badge-shadow-c2)">
+    <!-- Badge Glass Disc -->
+    <circle cx="512" cy="376" r="76" fill="url(#badge-bg-grad)" />
+    <!-- Outer Specular Glass Rim -->
+    <circle cx="512" cy="376" r="74.5" fill="none" stroke="url(#badge-rim-grad)" stroke-width="3" />
+
+    <!-- Ambient Cyan Core Glow behind Arrows -->
+    <circle cx="512" cy="376" r="48" fill="#00e5ff" opacity="0.12" filter="url(#arrow-glow-c2)" />
+
+    <!-- Dual Cyclic Update Arrows (青色循环双箭头) -->
+    <!-- Arrow 1: Top Arch (Sweeping clockwise from left to right-down) -->
+    <g filter="url(#arrow-glow-c2)">
+      <!-- Upper Curved Track -->
+      <path d="M 470 372 A 44 44 0 0 1 548 344"
+            fill="none" stroke="url(#badge-arrow-grad)" stroke-width="9" stroke-linecap="round" />
+      <!-- Upper Arrowhead (Pointing down-right) -->
+      <path d="M 556 348 L 544 322 L 532 352 Z"
+            fill="#00f5d4" />
+      <path d="M 556 348 L 544 322 L 532 352 Z"
+            fill="#ffffff" opacity="0.6" />
+
+      <!-- Arrow 2: Bottom Arch (Sweeping clockwise from right to left-up) -->
+      <!-- Lower Curved Track -->
+      <path d="M 554 380 A 44 44 0 0 1 476 408"
+            fill="none" stroke="url(#badge-arrow-grad)" stroke-width="9" stroke-linecap="round" />
+      <!-- Lower Arrowhead (Pointing up-left) -->
+      <path d="M 468 404 L 480 430 L 492 400 Z"
+            fill="#00f5d4" />
+      <path d="M 468 404 L 480 430 L 492 400 Z"
+            fill="#ffffff" opacity="0.6" />
+    </g>
+
+    <!-- Center Specular Micro Dot (Precision Axis) -->
+    <circle cx="512" cy="376" r="5" fill="#ffffff" opacity="0.85" />
+    <!-- Top-Left Glass Reflection on Badge Lens -->
+    <path d="M 474 340 A 60 60 0 0 1 536 322"
+          fill="none" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" opacity="0.5" />
+  </g>
+
+  <!-- Crisp Specular Outline Accentuating the M Negative Space Contour -->
+  <path d="M 318 700 L 318 396 L 512 534 L 706 396 L 706 700"
+        fill="none" stroke="#ffffff" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.45" />
+
+  <!-- Bottom Balance Accent Indicator (Cyan-Blue) -->
+  <rect x="470" y="836" width="84" height="6" rx="3" fill="#00e5ff" opacity="0.5" />
+</svg>

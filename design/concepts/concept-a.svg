@@ -1,0 +1,143 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1024" height="1024">
+  <defs>
+    <!-- macOS App Icon Drop Shadows -->
+    <filter id="icon-shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="32" stdDeviation="36" flood-color="#000511" flood-opacity="0.42" />
+      <feDropShadow dx="0" dy="12" stdDeviation="16" flood-color="#000c24" flood-opacity="0.25" />
+    </filter>
+
+    <filter id="symbol-shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="18" stdDeviation="22" flood-color="#020817" flood-opacity="0.55" />
+      <feDropShadow dx="0" dy="6" stdDeviation="8" flood-color="#002b66" flood-opacity="0.3" />
+    </filter>
+
+    <filter id="cyan-glow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="14" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+
+    <!-- Squircle Gradients -->
+    <linearGradient id="bg-grad-a" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#111c38" />
+      <stop offset="45%" stop-color="#0b1329" />
+      <stop offset="100%" stop-color="#050914" />
+    </linearGradient>
+
+    <!-- Squircle Radial Aurora Glow -->
+    <radialGradient id="aurora-a" cx="50%" cy="38%" r="65%">
+      <stop offset="0%" stop-color="#0a84ff" stop-opacity="0.32" />
+      <stop offset="50%" stop-color="#00c7be" stop-opacity="0.12" />
+      <stop offset="100%" stop-color="#0a84ff" stop-opacity="0" />
+    </radialGradient>
+
+    <!-- Squircle Bevel Highlight -->
+    <linearGradient id="squircle-rim-a" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.45" />
+      <stop offset="25%" stop-color="#ffffff" stop-opacity="0.18" />
+      <stop offset="75%" stop-color="#ffffff" stop-opacity="0.04" />
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0.15" />
+    </linearGradient>
+
+    <!-- Arrow 1 Gradient: Deep Blue to Vibrant Electric Blue to Cyan -->
+    <linearGradient id="arrow1-grad" x1="0%" y1="100%" x2="80%" y2="0%">
+      <stop offset="0%" stop-color="#0055ff" />
+      <stop offset="50%" stop-color="#0a84ff" />
+      <stop offset="100%" stop-color="#00e5ff" />
+    </linearGradient>
+
+    <!-- Arrow 2 Gradient: Cyan to Bright Blue to System Blue -->
+    <linearGradient id="arrow2-grad" x1="20%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00f5d4" />
+      <stop offset="40%" stop-color="#00c7be" />
+      <stop offset="85%" stop-color="#0a84ff" />
+      <stop offset="100%" stop-color="#0051e6" />
+    </linearGradient>
+
+    <!-- Glass Specular Highlight -->
+    <linearGradient id="specular-a1" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.85" />
+      <stop offset="50%" stop-color="#ffffff" stop-opacity="0.25" />
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0" />
+    </linearGradient>
+
+    <linearGradient id="specular-a2" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.9" />
+      <stop offset="60%" stop-color="#ffffff" stop-opacity="0.2" />
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0" />
+    </linearGradient>
+
+    <!-- Frosted overlay reflection -->
+    <linearGradient id="glass-sweep" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.16" />
+      <stop offset="35%" stop-color="#ffffff" stop-opacity="0.05" />
+      <stop offset="65%" stop-color="#ffffff" stop-opacity="0" />
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0.08" />
+    </linearGradient>
+  </defs>
+
+  <!-- Base macOS Squircle with Ambient Shadows -->
+  <g filter="url(#icon-shadow)">
+    <rect x="100" y="100" width="824" height="824" rx="185" ry="185" fill="url(#bg-grad-a)" />
+    <!-- Aurora Depth Layer -->
+    <rect x="100" y="100" width="824" height="824" rx="185" ry="185" fill="url(#aurora-a)" />
+    <!-- Glass Diagonal Sheen -->
+    <rect x="100" y="100" width="824" height="824" rx="185" ry="185" fill="url(#glass-sweep)" />
+    <!-- 1.5px Squircle Rim Bevel -->
+    <rect x="101.5" y="101.5" width="821" height="821" rx="183.5" ry="183.5" fill="none" stroke="url(#squircle-rim-a)" stroke-width="3" />
+  </g>
+
+  <!-- Ambient Internal Grid / Tech Rings (Subtle) -->
+  <circle cx="512" cy="512" r="320" fill="none" stroke="#0a84ff" stroke-width="1.5" stroke-opacity="0.12" stroke-dasharray="6 8" />
+  <circle cx="512" cy="512" r="240" fill="none" stroke="#00c7be" stroke-width="1" stroke-opacity="0.15" />
+
+  <!-- Central M Symbol formed by 2 Cyclic Update Arrows -->
+  <g filter="url(#symbol-shadow)">
+    <!-- ARROW 1: Left Leg -> Left Crest -> Down to Center Valley -->
+    <!-- Ambient Shadow Under-layer for 3D extrusion -->
+    <path d="M 284 720 L 284 416 C 284 316 352 270 424 316 L 508 528"
+          fill="none" stroke="#02081a" stroke-width="78" stroke-linecap="round" stroke-linejoin="round" opacity="0.6" />
+
+    <!-- Main Arrow 1 Body -->
+    <path d="M 284 712 L 284 416 C 284 322 350 278 420 322 L 500 528"
+          fill="none" stroke="url(#arrow1-grad)" stroke-width="72" stroke-linecap="round" stroke-linejoin="round" />
+
+    <!-- Arrow 1 Head (Terminates near center valley, pointing down-right toward refresh cycle) -->
+    <path d="M 522 576 L 476 500 L 536 514 Z"
+          fill="#00e5ff" filter="url(#cyan-glow)" />
+    <path d="M 522 576 L 476 500 L 536 514 Z"
+          fill="#00e5ff" />
+
+    <!-- Arrow 1 Glass Specular Highlight (Rim along left and crest) -->
+    <path d="M 276 680 L 276 416 C 276 332 342 290 410 330 L 452 432"
+          fill="none" stroke="url(#specular-a1)" stroke-width="6" stroke-linecap="round" />
+
+    <!-- ARROW 2: Center Ascent -> Right Crest -> Down Right Leg -> Bottom Cycle Return -->
+    <!-- Ambient Shadow Under-layer -->
+    <path d="M 518 480 L 604 316 C 674 270 740 316 740 416 L 740 650 C 740 730 670 758 578 748"
+          fill="none" stroke="#02081a" stroke-width="78" stroke-linecap="round" stroke-linejoin="round" opacity="0.6" />
+
+    <!-- Main Arrow 2 Body -->
+    <path d="M 524 492 L 604 322 C 674 278 740 322 740 416 L 740 644 C 740 724 670 752 584 742"
+          fill="none" stroke="url(#arrow2-grad)" stroke-width="72" stroke-linecap="round" stroke-linejoin="round" />
+
+    <!-- Arrow 2 Head (At bottom, sweeping back toward left, completing the update loop) -->
+    <path d="M 540 736 L 594 778 L 590 716 Z"
+          fill="#00f5d4" filter="url(#cyan-glow)" />
+    <path d="M 540 736 L 594 778 L 590 716 Z"
+          fill="#00f5d4" />
+
+    <!-- Arrow 2 Glass Specular Highlight (Rim along crest and right spine) -->
+    <path d="M 552 430 L 610 328 C 674 286 732 328 732 416 L 732 620"
+          fill="none" stroke="url(#specular-a2)" stroke-width="6" stroke-linecap="round" />
+  </g>
+
+  <!-- Central Energy Core / Sync Pulse Dot (Frosted Glass Orb in center valley) -->
+  <g filter="url(#symbol-shadow)">
+    <circle cx="512" cy="505" r="26" fill="#051026" stroke="#00e5ff" stroke-width="4" />
+    <circle cx="512" cy="505" r="14" fill="#00e5ff" filter="url(#cyan-glow)" />
+    <circle cx="508" cy="500" r="5" fill="#ffffff" opacity="0.9" />
+  </g>
+
+  <!-- Subtle Bottom Brand Accent Indicator -->
+  <rect x="472" y="836" width="80" height="6" rx="3" fill="#0a84ff" opacity="0.4" />
+</svg>

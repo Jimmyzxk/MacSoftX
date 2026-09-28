@@ -1,0 +1,169 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1024" height="1024">
+  <defs>
+    <!-- macOS App Icon Drop Shadows -->
+    <filter id="icon-shadow-b" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="32" stdDeviation="36" flood-color="#000311" flood-opacity="0.45" />
+      <feDropShadow dx="0" dy="12" stdDeviation="16" flood-color="#060624" flood-opacity="0.28" />
+    </filter>
+
+    <filter id="shield-shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="22" stdDeviation="26" flood-color="#020412" flood-opacity="0.6" />
+      <feDropShadow dx="0" dy="8" stdDeviation="10" flood-color="#1e1b4b" flood-opacity="0.35" />
+    </filter>
+
+    <filter id="check-shadow" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="14" stdDeviation="16" flood-color="#030517" flood-opacity="0.65" />
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#0a1033" flood-opacity="0.4" />
+    </filter>
+
+    <filter id="indigo-glow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="16" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+
+    <!-- Base Squircle Background Gradient (Indigo Dark Canvas) -->
+    <linearGradient id="bg-grad-b" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#14143d" />
+      <stop offset="50%" stop-color="#0c0d26" />
+      <stop offset="100%" stop-color="#050512" />
+    </linearGradient>
+
+    <!-- Squircle Radial Indigo Center Glow -->
+    <radialGradient id="aurora-b" cx="50%" cy="42%" r="65%">
+      <stop offset="0%" stop-color="#4f46e5" stop-opacity="0.28" />
+      <stop offset="45%" stop-color="#3b82f6" stop-opacity="0.12" />
+      <stop offset="100%" stop-color="#4f46e5" stop-opacity="0" />
+    </radialGradient>
+
+    <!-- Squircle Bevel Highlight -->
+    <linearGradient id="squircle-rim-b" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.42" />
+      <stop offset="25%" stop-color="#ffffff" stop-opacity="0.16" />
+      <stop offset="80%" stop-color="#ffffff" stop-opacity="0.03" />
+      <stop offset="100%" stop-color="#818cf8" stop-opacity="0.18" />
+    </linearGradient>
+
+    <!-- Left Shield Facet (System Blue Gradient) -->
+    <linearGradient id="shield-left-grad" x1="20%" y1="0%" x2="90%" y2="100%">
+      <stop offset="0%" stop-color="#38bdf8" />
+      <stop offset="25%" stop-color="#0284c7" />
+      <stop offset="70%" stop-color="#0066ff" />
+      <stop offset="100%" stop-color="#1e40af" />
+    </linearGradient>
+
+    <!-- Right Shield Facet (Indigo Gradient) -->
+    <linearGradient id="shield-right-grad" x1="10%" y1="0%" x2="90%" y2="100%">
+      <stop offset="0%" stop-color="#818cf8" />
+      <stop offset="35%" stop-color="#6366f1" />
+      <stop offset="75%" stop-color="#4338ca" />
+      <stop offset="100%" stop-color="#312e81" />
+    </linearGradient>
+
+    <!-- Shield Translucent Outer Ring Glass Gradient -->
+    <linearGradient id="shield-glass-rim" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.55" />
+      <stop offset="30%" stop-color="#818cf8" stop-opacity="0.3" />
+      <stop offset="70%" stop-color="#38bdf8" stop-opacity="0.1" />
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0.25" />
+    </linearGradient>
+
+    <!-- Checkmark Gradient: Ice White to Crisp Luminous Cyan-Indigo -->
+    <linearGradient id="check-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" />
+      <stop offset="45%" stop-color="#f0fdf4" />
+      <stop offset="75%" stop-color="#e0e7ff" />
+      <stop offset="100%" stop-color="#c7d2fe" />
+    </linearGradient>
+
+    <!-- Specular Highlight for Ridge and Arcs -->
+    <linearGradient id="specular-crest" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0" />
+      <stop offset="50%" stop-color="#ffffff" stop-opacity="0.85" />
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0" />
+    </linearGradient>
+
+    <!-- Diagonal Glass Sheen -->
+    <linearGradient id="glass-sweep-b" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.14" />
+      <stop offset="40%" stop-color="#ffffff" stop-opacity="0.04" />
+      <stop offset="60%" stop-color="#ffffff" stop-opacity="0" />
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0.06" />
+    </linearGradient>
+  </defs>
+
+  <!-- Base macOS Squircle with Ambient Shadows -->
+  <g filter="url(#icon-shadow-b)">
+    <rect x="100" y="100" width="824" height="824" rx="185" ry="185" fill="url(#bg-grad-b)" />
+    <!-- Center Indigo Aurora -->
+    <rect x="100" y="100" width="824" height="824" rx="185" ry="185" fill="url(#aurora-b)" />
+    <!-- Diagonal Glass Reflection -->
+    <rect x="100" y="100" width="824" height="824" rx="185" ry="185" fill="url(#glass-sweep-b)" />
+    <!-- 1.5px Squircle Rim Bevel -->
+    <rect x="101.5" y="101.5" width="821" height="821" rx="183.5" ry="183.5" fill="none" stroke="url(#squircle-rim-b)" stroke-width="3" />
+  </g>
+
+  <!-- Background Radar / Inspection Rings (Symbol of Continuous Software Audit) -->
+  <g opacity="0.22">
+    <circle cx="512" cy="512" r="330" fill="none" stroke="#6366f1" stroke-width="1.5" stroke-dasharray="10 14" />
+    <circle cx="512" cy="512" r="260" fill="none" stroke="#38bdf8" stroke-width="1" />
+    <circle cx="512" cy="512" r="190" fill="none" stroke="#818cf8" stroke-width="1" stroke-dasharray="4 8" />
+  </g>
+
+  <!-- Main Shield Group with 3D Depth & Shadow -->
+  <g filter="url(#shield-shadow)">
+    <!-- Outer Translucent Glass Shield Border -->
+    <path d="M 512 266
+             C 380 266, 276 296, 276 296
+             C 276 496, 320 644, 512 758
+             C 704 644, 748 496, 748 296
+             C 748 296, 644 266, 512 266 Z"
+          fill="none" stroke="url(#shield-glass-rim)" stroke-width="8" stroke-linejoin="round" />
+
+    <!-- Left Facet: System Blue -->
+    <path d="M 512 274
+             C 386 274, 286 304, 286 304
+             C 286 490, 328 632, 512 742 Z"
+          fill="url(#shield-left-grad)" />
+
+    <!-- Right Facet: Indigo -->
+    <path d="M 512 274
+             C 638 274, 738 304, 738 304
+             C 738 490, 696 632, 512 742 Z"
+          fill="url(#shield-right-grad)" />
+
+    <!-- Top Edge Specular Crest Arc -->
+    <path d="M 300 304 C 400 278, 624 278, 724 304"
+          fill="none" stroke="url(#specular-crest)" stroke-width="4" stroke-linecap="round" />
+
+    <!-- Center Spine 3D Bevel Line -->
+    <line x1="512" y1="274" x2="512" y2="742"
+          stroke="#ffffff" stroke-width="2.5" stroke-opacity="0.45" stroke-linecap="round" />
+
+    <!-- Inner Glass Corner Specular (Left Shoulder) -->
+    <path d="M 292 316 C 350 340, 450 360, 512 360"
+          fill="none" stroke="#ffffff" stroke-width="1.5" stroke-opacity="0.2" />
+  </g>
+
+  <!-- High-Precision Glass Checkmark (内嵌可信赖对勾) -->
+  <g filter="url(#check-shadow)">
+    <!-- Ambient 3D Occlusion Shadow beneath Checkmark -->
+    <path d="M 382 524 L 468 610 L 652 426"
+          fill="none" stroke="#05081e" stroke-width="64" stroke-linecap="round" stroke-linejoin="round" opacity="0.6" />
+
+    <!-- Main Luminous Checkmark Body -->
+    <path d="M 382 516 L 468 602 L 652 418"
+          fill="none" stroke="url(#check-grad)" stroke-width="54" stroke-linecap="round" stroke-linejoin="round" />
+
+    <!-- Glowing Rim on Checkmark -->
+    <path d="M 382 514 L 468 600 L 652 416"
+          fill="none" stroke="#ffffff" stroke-width="12" stroke-linecap="round" stroke-linejoin="round" opacity="0.9" />
+
+    <!-- Specular Highlight Dots on Checkmark Terminals -->
+    <circle cx="382" cy="514" r="5" fill="#ffffff" />
+    <circle cx="652" cy="416" r="6" fill="#ffffff" />
+    <circle cx="468" cy="600" r="4" fill="#ffffff" opacity="0.75" />
+  </g>
+
+  <!-- Subtle Bottom Trust Indicator -->
+  <rect x="464" y="836" width="96" height="6" rx="3" fill="#6366f1" opacity="0.4" />
+</svg>
