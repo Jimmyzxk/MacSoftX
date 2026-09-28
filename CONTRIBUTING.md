@@ -87,7 +87,7 @@ public protocol UpdateProvider: Sendable {
 3. `swift build -Xswiftc -warnings-as-errors` 必须零警告
 4. PR 描述里说明**改了什么**和**为什么**
 
-CI 会在 macOS 15 runner 上跑：严格构建、发布构建、全量测试，以及 CLI 冒烟验证。
+CI 会在 macOS 26 runner 上跑：严格构建、发布构建、全量测试，以及 CLI 冒烟验证。
 
 ## 许可
 
