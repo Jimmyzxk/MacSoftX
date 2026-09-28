@@ -7,7 +7,7 @@ Mac 菜单栏软件管理器：把 **GUI 应用、App Store 应用、终端里�
 ![macOS](https://img.shields.io/badge/macOS-15%2B-000000?style=flat&logo=apple&logoColor=white)
 ![Swift](https://img.shields.io/badge/Swift-5.9%2B-F05138?style=flat&logo=swift&logoColor=white)
 ![License](https://img.shields.io/badge/license-MIT-green?style=flat)
-[![CI](https://github.com/Jimmyzxk/macsoft-x/actions/workflows/ci.yml/badge.svg)](https://github.com/Jimmyzxk/macsoft-x/actions/workflows/ci.yml)
+[![CI](https://github.com/Jimmyzxk/MacSoftX/actions/workflows/ci.yml/badge.svg)](https://github.com/Jimmyzxk/MacSoftX/actions/workflows/ci.yml)
 
 ## 为什么做它
 
@@ -52,8 +52,8 @@ Mac 的软件散落在三个互不相通的地方：
 ### 自行构建
 
 ```bash
-git clone https://github.com/Jimmyzxk/macsoft-x.git
-cd macsoft-x
+git clone https://github.com/Jimmyzxk/MacSoftX.git
+cd MacSoftX
 swift build -c release
 ./Scripts/make-app.sh
 ```
