@@ -238,6 +238,15 @@ public struct CockpitView: View {
                 window.title = "最好用的 Mac 软件管理工具"
                 window.titleVisibility = .hidden
                 window.titlebarAppearsTransparent = true
+
+                // 移除侧栏折叠按钮：columnVisibility 被锁死在 .all（见下方 onChange），
+                // 该按钮点了也没反应，留着只会让人以为界面坏了（用户 2026-09-28 反馈）。
+                // .toolbar(removing: .sidebarToggle) 在 macOS 26 下不生效，只能从 NSToolbar 摘；
+                // 工具栏晚于窗口创建，故立即 + 延迟各清一次。
+                WindowManager.removeSidebarToggle(from: window)
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1.2) {
+                    WindowManager.removeSidebarToggle(from: window)
+                    }
             }
         }
         .onAppear {
@@ -294,7 +303,7 @@ public struct CockpitView: View {
         colorScheme == .dark ? Self.sidebarGradientDark : Self.sidebarGradientLight
     }
 
-    // MARK: - 工具栏 Slogan 字标（与搜索框同排，省下内容区一整行）
+    // MARK: - 工具栏 Slogan 字标（与搜索框同排）
     private var toolbarSlogan: some View {
         HStack(spacing: 4) {
             Text("最好用的")
@@ -359,11 +368,6 @@ public struct CockpitView: View {
             }
             .padding(.horizontal, 16)
             .frame(height: 40)
-
-            // 极淡分隔线：让品牌头读作独立区域，同时兜住下方列表的起点
-            Rectangle()
-                .fill(Color.white.opacity(colorScheme == .dark ? 0.08 : 0.12))
-                .frame(height: 0.5)
         }
     }
 
@@ -545,7 +549,7 @@ public struct CockpitView: View {
     // MARK: - 中间列表区与底部状态栏
     private var middleListPane: some View {
         VStack(spacing: 0) {
-            // 页头 Slogan 已移入工具栏（见 toolbarSlogan），此处不再占一行
+            // 页头 Slogan 位于工具栏（见 toolbarSlogan），此处不再占一行
 
             // 跨页全局检索跳转提示条（当另一页有更多匹配时）
             if !searchText.isEmpty {
@@ -600,14 +604,20 @@ public struct CockpitView: View {
             bottomStatusBar
         }
         .toolbar {
-            // Slogan 字标：放在工具栏最左（原独立页头行，与搜索框同排可省下一整行，
-            // 并避免「窗口标题 Macsoft X + 侧栏 Macsoft X + 页头 Slogan」三处品牌重复）
+            // Slogan 字标：工具栏最左（用户要求与搜索栏同排，省下内容区一整行）
             ToolbarItem(placement: .navigation) {
                 toolbarSlogan
             }
 
+            // 弹性空格把后续控件顶到工具栏尾部（靠右）。
+            // 实测本窗口在 macOS 26 下，单靠 ToolbarItemPlacement(.primaryAction) 不会右对齐，
+            // 必须显式插入弹性空格；ToolbarSpacer 是 macOS 26 起的官方 API，低版本自动降级。
+            if #available(macOS 26.0, *) {
+                ToolbarSpacer(.flexible)
+            }
+
             // 搜索框（支持 ⌘F 聚焦）
-            ToolbarItem(placement: .automatic) {
+            ToolbarItemGroup(placement: .primaryAction) {
                 HStack(spacing: DesignSystem.Spacing.xs) {
                     Image(systemName: "magnifyingglass")
                         .foregroundStyle(DesignSystem.Colors.textSecondary)
@@ -634,10 +644,8 @@ public struct CockpitView: View {
                 .padding(.horizontal, DesignSystem.Spacing.s)
                 .padding(.vertical, DesignSystem.Spacing.xs)
                 .background(DesignSystem.Colors.subtleFill, in: RoundedRectangle(cornerRadius: DesignSystem.CornerRadius.tile))
-            }
 
-            // 排序菜单（收敛为：搜索框 + 排序(含类别) + 立即扫描；菜单顶部加"类别"子菜单）
-            ToolbarItem(placement: .automatic) {
+                // 排序菜单（与搜索框同组，随组一起落到工具栏尾区）
                 Menu {
                     Menu("类别") {
                         Picker("类别", selection: $categoryFilter) {

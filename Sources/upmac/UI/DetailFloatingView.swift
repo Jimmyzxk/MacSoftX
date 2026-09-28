@@ -121,28 +121,31 @@ public struct DetailFloatingView: View {
 
         Divider()
 
-        // 操作按钮组
+        // 操作按钮组：主操作独占一行（主 CTA 全宽是常规做法），次要操作并排，
+        // 避免三个全宽按钮纵向堆叠成「长又窄」的条状（用户 2026-09-28 反馈）
         VStack(spacing: 10) {
             scanActionButtons(item: item)
 
-            if let path = matchedAppPath(for: item) {
+            HStack(spacing: 10) {
+                if let path = matchedAppPath(for: item) {
+                    Button {
+                        NSWorkspace.shared.selectFile(path, inFileViewerRootedAtPath: "")
+                    } label: {
+                        Label("在 Finder 中显示", systemImage: "folder")
+                            .frame(maxWidth: .infinity)
+                    }
+                    .controlSize(.regular)
+                }
+
                 Button {
-                    NSWorkspace.shared.selectFile(path, inFileViewerRootedAtPath: "")
+                    NSPasteboard.general.clearContents()
+                    NSPasteboard.general.setString(item.name, forType: .string)
                 } label: {
-                    Label("在 Finder 中显示", systemImage: "folder")
+                    Label("复制名称", systemImage: "doc.on.doc")
                         .frame(maxWidth: .infinity)
                 }
                 .controlSize(.regular)
             }
-
-            Button {
-                NSPasteboard.general.clearContents()
-                NSPasteboard.general.setString(item.name, forType: .string)
-            } label: {
-                Label("复制名称", systemImage: "doc.on.doc")
-                    .frame(maxWidth: .infinity)
-            }
-            .controlSize(.regular)
         }
     }
 
@@ -244,24 +247,26 @@ public struct DetailFloatingView: View {
                 }
             }
 
-            if let path = item.path {
+            HStack(spacing: 10) {
+                if let path = item.path {
+                    Button {
+                        NSWorkspace.shared.selectFile(path, inFileViewerRootedAtPath: "")
+                    } label: {
+                        Label("在 Finder 中显示", systemImage: "folder")
+                            .frame(maxWidth: .infinity)
+                    }
+                    .controlSize(.regular)
+                }
+
                 Button {
-                    NSWorkspace.shared.selectFile(path, inFileViewerRootedAtPath: "")
+                    NSPasteboard.general.clearContents()
+                    NSPasteboard.general.setString(item.name, forType: .string)
                 } label: {
-                    Label("在 Finder 中显示", systemImage: "folder")
+                    Label("复制名称", systemImage: "doc.on.doc")
                         .frame(maxWidth: .infinity)
                 }
                 .controlSize(.regular)
             }
-
-            Button {
-                NSPasteboard.general.clearContents()
-                NSPasteboard.general.setString(item.name, forType: .string)
-            } label: {
-                Label("复制名称", systemImage: "doc.on.doc")
-                    .frame(maxWidth: .infinity)
-            }
-            .controlSize(.regular)
         }
     }
 
