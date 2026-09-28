@@ -1,5 +1,5 @@
-// swift-tools-version: 6.2
-// The swift-tools-version declares the minimum version of Swift required to build this package.
+// swift-tools-version: 5.9
+// 最低 Swift 工具链 5.9（Xcode 15），保证多数 macOS 15/26 环境可直接构建
 // TODO(swift-6): 迁移至 Swift 6 strict concurrency
 
 import PackageDescription
@@ -7,7 +7,8 @@ import PackageDescription
 let package = Package(
     name: "upmac",
     platforms: [
-        .macOS(.v15)
+        // 5.9 工具链尚无 .v15 常量，使用字符串形式的自定义平台版本声明
+        .macOS("15.0")
     ],
     products: [
         .executable(
@@ -27,6 +28,5 @@ let package = Package(
             dependencies: ["upmac"],
             path: "Tests/upmacTests"
         )
-    ],
-    swiftLanguageModes: [.v5]
+    ]
 )
